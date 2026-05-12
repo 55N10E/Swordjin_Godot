@@ -8,6 +8,13 @@
 ## Session: 2026-05-12 Heartbeat
 
 ### Completed This Session
+- [x] Title screen (start, continue, chapter select) — **v0.30**
+- [x] Title screen → ChapterManager → main.tscn flow
+- [x] Continue button uses save progress (completed_chapters)
+- [x] Project main_scene switched to title_screen.tscn
+- [x] Title screen has back button hook from ChapterManager
+
+### Previous (v0.28)
 - [x] Skeleton Captain scene + script (shield, charge, counterattack)
 - [x] ChapterManager UI (act tabs, chapter grid, progress bar)
 - [x] AudioManager autoload (8-channel pool, random pitch, volume)
@@ -16,8 +23,10 @@
 - [x] Keybinds: C=chapter select, M=mute, R=restart
 - [x] Godot .uid files for new scripts
 
-### Commit
-**v0.28** `08c0022` — Skeleton Captain, ChapterManager UI, AudioManager + 8 SFX placeholders
+### Commits
+- **v0.30** `0b5a984` — Title screen, ChapterManager back hook, cleaner continue logic
+- **v0.29** `4fb093b` — Title screen scene + script
+- **v0.28** `08c0022` — Skeleton Captain, ChapterManager UI, AudioManager + 8 SFX placeholders
 
 ### Current Stats
 | Component | Status |
@@ -33,6 +42,7 @@
 | PWA export | ✅ Pipeline ready |
 | AudioManager + SFX placeholders | ✅ Complete |
 | ChapterManager UI | ✅ Complete |
+| Title screen | ✅ v0.30 |
 | Sound | Partial — placeholders wired |
 | Art pipeline | None |
 
@@ -40,7 +50,6 @@
 1. Replace placeholder SFX with real generated/processed assets
 2. Chapter 001-003 full gameplay test in Godot editor
 3. BGM placeholder / ambient track
-4. Title screen (launch → ChapterManager)
-5. Push to GitHub/Codeberg
+4. Push to GitHub/Codeberg
 
-LAST_RUN=20260512_1323
+LAST_RUN=20260512_1413

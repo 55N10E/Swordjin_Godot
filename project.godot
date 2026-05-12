@@ -4,7 +4,7 @@
 [application]
 config/name="Swordjin"
 config/description="Lightweight fantasy action RPG — Godot 4.4 edition"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/title_screen.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://assets/sprites/icon.png"
 
