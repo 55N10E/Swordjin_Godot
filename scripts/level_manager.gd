@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var player = $Player
 @onready var skeleton_scene = preload("res://scenes/skeleton.tscn")
+@onready var captain_scene = preload("res://scenes/skeleton_captain.tscn")
 
 var chapter_data: Dictionary = {}
 var enemies_remaining := 0
@@ -32,6 +33,13 @@ func _ready():
 		dlg_instance.name = "DialogueManager"
 		add_child(dlg_instance)
 	
+	# Add chapter manager (hidden by default)
+	var chm_scene = load("res://scenes/chapter_manager.tscn")
+	if chm_scene:
+		var chm_instance = chm_scene.instantiate()
+		chm_instance.name = "ChapterManager"
+		add_child(chm_instance)
+	
 	_dialogue_start()
 	
 	# Update UI
@@ -43,6 +51,7 @@ func _ready():
 	$ColorRect.color = Color(bg[0], bg[1], bg[2])
 	
 	print("Chapter loaded: %s" % chapter_data.get("title", "?"))
+	print("Press C for chapter select | M for mute")
 
 func _dialogue_start():
 	var dlg = get_node("DialogueManager")
@@ -88,10 +97,12 @@ func _setup_level():
 	GameState.chapter_kills = 0
 
 func _spawn_enemy(type: String, pos: Vector2, stats: Dictionary):
-	if type != "skeleton":
-		return  # Only skeleton implemented
-	
-	var inst = skeleton_scene.instantiate()
+	var inst: CharacterBody2D
+	if type == "skeleton_captain":
+		inst = captain_scene.instantiate()
+	else:
+		inst = skeleton_scene.instantiate()
+		
 	inst.position = pos
 	add_child(inst)
 	
@@ -150,6 +161,7 @@ func _on_objective_dialogue_done():
 
 func _finish_chapter_complete():
 	print("Chapter complete! Loading next...")
+	AudioManager.play_sfx("level_complete")
 	GameState.complete_current_chapter()
 	
 	# Check if there's a next chapter
@@ -164,3 +176,13 @@ func _finish_chapter_complete():
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
 		get_tree().reload_current_scene()
+	if event is InputEventKey and event.pressed and event.keycode == KEY_C:
+		var chm = get_node_or_null("ChapterManager")
+		if chm:
+			chm.visible = not chm.visible
+			if chm.visible:
+				chm.show_manager()
+			else:
+				chm.hide_manager()
+	if event is InputEventKey and event.pressed and event.keycode == KEY_M:
+		AudioManager.set_volume(0.0 if AudioManager.master_volume > 0.0 else 0.8)

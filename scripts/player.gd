@@ -67,6 +67,8 @@ func take_damage(amount: int):
 	health -= amount
 	_update_label()
 	
+	AudioManager.play_sfx("player_hurt")
+	
 	# Flash red
 	modulate = Color.RED
 	await get_tree().create_timer(0.1).timeout
@@ -110,6 +112,8 @@ func _start_attack():
 	cooldown_timer = attack_duration + attack_cooldown
 	attack_hitbox.disabled = false
 	
+	AudioManager.play_random_pitch("sword_swing", 0.95, 1.05)
+	
 # Face direction for lunge
 	var facing_right = sprite.scale.x >= 0
 	var facing = Vector2.RIGHT if facing_right else Vector2.LEFT
@@ -126,4 +130,5 @@ func _end_attack():
 func _on_attack_hitbox_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(10)
+		AudioManager.play_random_pitch("sword_hit", 0.9, 1.1)
 		print("Hit: ", body.name)

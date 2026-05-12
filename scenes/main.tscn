@@ -61,7 +61,7 @@ offset_top = 10.0
 offset_right = 400.0
 offset_bottom = 30.0
 theme_override_font_sizes/font_size = 11
-text = "WASD = Move  |  SPACE = Attack  |  R = Restart"
+text = "WASD=Move | SPACE=Atk | C=Select | M=Mute | R=Restart"
 
 [node name="Objective" type="Label" parent="."]
 offset_left = 10.0
