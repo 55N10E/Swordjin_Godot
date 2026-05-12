@@ -24,4 +24,4 @@ builds/web/*.worklet.js
 
 # OS
 .DS_Store
-Thumbs.db
+Thumbs.dblogs/
