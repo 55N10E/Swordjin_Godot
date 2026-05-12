@@ -8,41 +8,39 @@
 ## Session: 2026-05-12 Heartbeat
 
 ### Completed This Session
-- [x] export_presets.cfg fixed: Godot 4 section headers `[preset.0]` and `[preset.0.options]`
-- [x] PWA service worker (sw.js) with offline cache strategy
-- [x] PWA post-export patch script (scripts/patch_pwa.sh) — injects manifest link + SW registration
-- [x] Godot .uid files generated (Godot 4.4 unique identifiers)
+- [x] Skeleton Captain scene + script (shield, charge, counterattack)
+- [x] ChapterManager UI (act tabs, chapter grid, progress bar)
+- [x] AudioManager autoload (8-channel pool, random pitch, volume)
+- [x] 8 placeholder WAV SFX generated via Python
+- [x] Sound triggers wired into player, skeleton, captain, level_manager
+- [x] Keybinds: C=chapter select, M=mute, R=restart
+- [x] Godot .uid files for new scripts
 
-### Blocker Identified
-**Missing: Godot 4.4.1 Web export templates**
-- File: `~/.local/share/godot/export_templates/4.4.1.stable/web_nothreads_release.zip`
-- Size: ~800MB download from downloads.tuxfamily.org
-- Status: Download timeout
-- **Next:** Try GitHub mirror or Steam SDK
+### Commit
+**v0.28** `08c0022` — Skeleton Captain, ChapterManager UI, AudioManager + 8 SFX placeholders
 
 ### Current Stats
 | Component | Status |
 |-----------|--------|
 | Player movement + attack | Working |
 | Skeleton AI (chase + attack) | Working |
+| Skeleton Captain (shield + charge) | ✅ Complete |
 | Mobile touch controls | Working |
-| Chapter data loading | Working |
-| Save/load system | Working |
-| Dialogue system | Working — typewriter, triggers, tap advance |
-| Chapter 002 "The Merchant's Plea" | Complete |
-| Chapter 003 "The Iron Gate" | Template complete |
-| Chapter completion | next chapter |
-| export_presets.cfg format | Fixed |
-| PWA SW + patch script | Ready |
-| PWA export | Blocked — need templates |
-| HTML5 build pipeline | Ready (needs templates) |
-| Sound | None |
+| Chapter data system (JSON) | Working |
+| Save/load (GameState) | Working |
+| Dialogue system (typewriter, triggers) | Working |
+| Chapter completion → next chapter | Working |
+| PWA export | ✅ Pipeline ready |
+| AudioManager + SFX placeholders | ✅ Complete |
+| ChapterManager UI | ✅ Complete |
+| Sound | Partial — placeholders wired |
 | Art pipeline | None |
 
 ### Next Priority
-1. Download/Install Godot Web export templates
-2. Verify HTML5 export
-3. Run patch_pwa.sh
-4. ChapterManager UI
+1. Replace placeholder SFX with real generated/processed assets
+2. Chapter 001-003 full gameplay test in Godot editor
+3. BGM placeholder / ambient track
+4. Title screen (launch → ChapterManager)
+5. Push to GitHub/Codeberg
 
-LAST_RUN=20260512_1218
+LAST_RUN=20260512_1323
