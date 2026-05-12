@@ -3,41 +3,46 @@
 ## Current Build Info
 - Engine: Godot 4.4.1-stable (GL Compatibility)
 - Target: Mobile PWA via HTML5 export
-- Resolution: 640×360 (scales to mobile)
+- Resolution: 640x360 (scales to mobile)
 
-## Session: 2026-05-12
+## Session: 2026-05-12 Heartbeat
 
 ### Completed This Session
-- [x] Chapter 003: "The Iron Gate" — JSON + MD template added
-  - Captain enemy type stub (falls back to skeleton until scene implemented)
-  - 4 enemies (3 skeletons + 1 captain with doubled HP/damage)
-  - 100 XP reward, unlocks act01_ch004
-- [x] Dialogue entries for start and objective_complete triggers
-- [x] Design doc includes implementation status checklist
-- [x] .dev_progress and HEARTBEAT.md updated
-- [x] Committed to Swordjin_Godot repo
+- [x] export_presets.cfg fixed: Godot 4 section headers `[preset.0]` and `[preset.0.options]`
+- [x] PWA service worker (sw.js) with offline cache strategy
+- [x] PWA post-export patch script (scripts/patch_pwa.sh) — injects manifest link + SW registration
+- [x] Godot .uid files generated (Godot 4.4 unique identifiers)
+
+### Blocker Identified
+**Missing: Godot 4.4.1 Web export templates**
+- File: `~/.local/share/godot/export_templates/4.4.1.stable/web_nothreads_release.zip`
+- Size: ~800MB download from downloads.tuxfamily.org
+- Status: Download timeout
+- **Next:** Try GitHub mirror or Steam SDK
 
 ### Current Stats
 | Component | Status |
 |-----------|--------|
-| Player movement + attack | ✅ |
-| Skeleton AI (chase + attack) | ✅ |
-| Mobile touch controls | ✅ |
-| Chapter data loading | ✅ |
-| Save/load system | ✅ |
-| Dialogue system | ✅ Typewriter, triggers, tap advance |
-| Chapter 002 "The Merchant's Plea" | ✅ |
-| Chapter 003 "The Iron Gate" | ✅ Template |
-| Chapter completion → next chapter | ✅ |
-| PWA export | ⏳ Next |
-| HTML5 build pipeline | ⏳ Next |
-| Sound | ⏳ None |
-| Art pipeline | ⏳ None |
+| Player movement + attack | Working |
+| Skeleton AI (chase + attack) | Working |
+| Mobile touch controls | Working |
+| Chapter data loading | Working |
+| Save/load system | Working |
+| Dialogue system | Working — typewriter, triggers, tap advance |
+| Chapter 002 "The Merchant's Plea" | Complete |
+| Chapter 003 "The Iron Gate" | Template complete |
+| Chapter completion | next chapter |
+| export_presets.cfg format | Fixed |
+| PWA SW + patch script | Ready |
+| PWA export | Blocked — need templates |
+| HTML5 build pipeline | Ready (needs templates) |
+| Sound | None |
+| Art pipeline | None |
 
 ### Next Priority
-1. PWA export — verify HTML5 build on Packy (need export_presets.cfg check)
-2. ChapterManager UI (chapter select screen)
-3. Sound placeholders (generated SFX)
-4. Skeleton captain scene variant
+1. Download/Install Godot Web export templates
+2. Verify HTML5 export
+3. Run patch_pwa.sh
+4. ChapterManager UI
 
-LAST_RUN=20260512_1155
+LAST_RUN=20260512_1218
