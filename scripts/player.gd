@@ -82,6 +82,17 @@ func _update_label():
 	if label:
 		label.text = "Player HP: %d/%d" % [health, max_health]
 
+func merchant_heal(amount: int):
+	if is_dead:
+		return
+	health = mini(health + amount, max_health)
+	_update_label()
+	AudioManager.play_sfx("ui_click")
+	modulate = Color.GREEN
+	await get_tree().create_timer(0.2).timeout
+	if not is_dead:
+		modulate = Color.WHITE
+
 func _die():
 	is_dead = true
 	print("Player defeated!")

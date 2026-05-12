@@ -1,33 +1,24 @@
-# Swordjin Godot Development Progress
-
 ## Current Build Info
 - Engine: Godot 4.4.1-stable (GL Compatibility)
 - Target: Mobile PWA via HTML5 export
 - Resolution: 640x360 (scales to mobile)
+- Version: v0.50
 
-## Session: 2026-05-12 Heartbeat
+## Session: 2026-05-13 Gameplay Balance
 
 ### Completed This Session
-- [x] Title screen (start, continue, chapter select) — **v0.30**
-- [x] Title screen → ChapterManager → main.tscn flow
-- [x] Continue button uses save progress (completed_chapters)
-- [x] Project main_scene switched to title_screen.tscn
-- [x] Title screen has back button hook from ChapterManager
+- [x] Ch1-3 gameplay balance (HP/dmg numbers)
+- [x] Chapter 001: skeletons 30→35 HP, 80→85 speed
+- [x] Chapter 002: skeletons 40→45 HP, 10→12 dmg; merchant ally + heals 25 HP on chapter complete
+- [x] Chapter 003: skeletons 35→40 HP, 8→10 dmg; captain 80→120 HP, 15→22 dmg, shield_max 3→5; boss arena color redder
+- [x] `player.gd`: added `merchant_heal(amount)` method with green flash + SFX
+- [x] `level_manager.gd`: connected heal after `objective_complete` when allies present
+- [x] Headless build check: clean
 
-### Previous (v0.28)
-- [x] Skeleton Captain scene + script (shield, charge, counterattack)
-- [x] ChapterManager UI (act tabs, chapter grid, progress bar)
-- [x] AudioManager autoload (8-channel pool, random pitch, volume)
-- [x] 8 placeholder WAV SFX generated via Python
-- [x] Sound triggers wired into player, skeleton, captain, level_manager
-- [x] Keybinds: C=chapter select, M=mute, R=restart
-- [x] Godot .uid files for new scripts
-
-### Commits
-- **v0.33** `CURRENT` — Fixed chapter_manager.gd ternary syntax (Godot 4.4 doesn't support `?:`)
-        - Regenerated SFX placeholders via generate_sfx.py + AudioManager .sample cache verified
-        - Headless build check: clean, zero parse errors
-- **v0.28** `08c0022` — Skeleton Captain, ChapterManager UI, AudioManager + 8 SFX placeholders
+### Previous (v0.34)
+- [x] Title screen (start, continue, chapter select)
+- [x] AudioManager + BGM crossfade
+- [x] Skeleton Captain + ChapterManager UI + PWA export pipeline
 
 ### Current Stats
 | Component | Status |
@@ -48,10 +39,9 @@
 | Art pipeline | None |
 | Parse errors | 0 (clean headless check) |
 
-### v0.35 Next
-1. PWA web deploy test on GitHub Pages
-2. Replace SFX placeholders with processed assets
-3. Ch1-3 gameplay balance (HP/dmg numbers)
-4. BGM loop seamless crossfade polish
+### v0.51 Next
+1. Merchant ally scene (spawn + follow player logic)
+2. Real SFX/BGM asset pipeline
+3. Title screen art & polish
 
-LAST_RUN=20260512_1755
+LAST_RUN=20260513_0047

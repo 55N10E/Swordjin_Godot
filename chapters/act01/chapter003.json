@@ -6,7 +6,7 @@
   "type": "combat",
   "playtime_estimate_minutes": 3,
   "objective": "Defeat the skeleton captain and his guards",
-  "background_color": [0.15, 0.12, 0.08],
+  "background_color": [0.18, 0.08, 0.05],
   "enemies": [
     {
       "type": "skeleton",
@@ -17,9 +17,9 @@
         {"x": 400, "y": 300}
       ],
       "stats": {
-        "health": 35,
+        "health": 40,
         "speed": 80,
-        "damage": 8
+        "damage": 10
       }
     },
     {
@@ -29,9 +29,10 @@
         {"x": 600, "y": 120}
       ],
       "stats": {
-        "health": 80,
+        "health": 120,
         "speed": 65,
-        "damage": 15
+        "damage": 22,
+        "shield_max": 5
       }
     }
   ],

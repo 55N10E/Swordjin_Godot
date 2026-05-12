@@ -18,8 +18,8 @@
         {"x": 550, "y": 160}
       ],
       "stats": {
-        "health": 30,
-        "speed": 80,
+        "health": 35,
+        "speed": 85,
         "damage": 8
       }
     }
