@@ -4,6 +4,7 @@ extends Node2D
 @onready var player = $Player
 @onready var skeleton_scene = preload("res://scenes/skeleton.tscn")
 @onready var captain_scene = preload("res://scenes/skeleton_captain.tscn")
+@onready var merchant_scene = preload("res://scenes/merchant_ally.tscn")
 
 var chapter_data: Dictionary = {}
 var enemies_remaining := 0
@@ -88,6 +89,24 @@ func _setup_level():
 		for pos_data in positions:
 			var pos = Vector2(pos_data.x, pos_data.y)
 			_spawn_enemy(enemy_type, pos, stats)
+	
+	# Spawn allies
+	var allies = chapter_data.get("allies", [])
+	for ally_data in allies:
+		var ally_type = ally_data.get("type", "merchant")
+		if ally_type == "merchant" and merchant_scene:
+			var ally_inst = merchant_scene.instantiate()
+			var apos = ally_data.get("position", {"x": 150, "y": 250})
+			ally_inst.position = Vector2(apos.x, apos.y)
+			var lines = []
+			if ally_data.has("dialogue"):
+				var dlg = ally_data["dialogue"]
+				for k in ["start", "mid_combat", "objective_complete"]:
+					if dlg.has(k):
+						lines.append(dlg[k])
+				if ally_inst.has_method("_setup"):
+					ally_inst._setup(lines)
+			add_child(ally_inst)
 	
 	enemies_remaining = 0
 	for child in get_children():
