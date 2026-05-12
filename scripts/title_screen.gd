@@ -10,6 +10,9 @@ extends Control
 func _ready():
 	start_btn.grab_focus()
 	
+	# Start title music
+	AudioManager.play_bgm("bgm_title", 1.0, true)
+	
 	# Disable continue if no progress
 	if GameState.completed_chapters.is_empty():
 		continue_btn.disabled = true
@@ -19,6 +22,7 @@ func _on_start_pressed():
 	ChapterDatabase.set_current_chapter("act01_ch001")
 	GameState.reset_chapter_state()
 	AudioManager.play_sfx("ui_click")
+	AudioManager.stop_bgm(0.5)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_continue_pressed():
@@ -26,6 +30,7 @@ func _on_continue_pressed():
 	ChapterDatabase.set_current_chapter(id)
 	GameState.reset_chapter_state()
 	AudioManager.play_sfx("ui_click")
+	AudioManager.stop_bgm(0.5)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_select_pressed():

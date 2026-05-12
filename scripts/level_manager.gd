@@ -70,6 +70,7 @@ func _dialogue_start():
 
 func _on_dialogue_ended_start():
 	dialogue_triggered["start"] = true
+	AudioManager.play_bgm("bgm_battle", 1.0, true)
 
 func _setup_level():
 	# Clear existing skeletons
