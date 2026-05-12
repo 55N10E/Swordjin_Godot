@@ -4,12 +4,19 @@
 *.import
 .import/
 
-# Build outputs
+# Build outputs (keep PWA infra: manifest.json, sw.js)
 builds/web/*.html
 builds/web/*.js
 builds/web/*.wasm
 builds/web/*.pck
 builds/web/*.data
+builds/web/*.png
+builds/web/*.svg
+builds/web/*.manifest.json
+builds/web/*.icon.png
+builds/web/*.offline.html
+builds/web/*.service.worker.js
+builds/web/*.worklet.js
 
 # IDE
 .vscode/
