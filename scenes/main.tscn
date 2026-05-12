@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://main_scene"]
+
+[ext_resource type="PackedScene" uid="uid://player_scene" path="res://scenes/player.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(640, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2"]
+size = Vector2(16, 360)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1"]
+size = Vector2(32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+line_spacing = 0.0
+font_size = 11
+
+[node name="Main" type="Node2D"]
+script = ExtResource("2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.08, 0.1, 0.12, 1)
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+collision_layer = 1
+position = Vector2(320, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+collision_layer = 1
+position = Vector2(320, 368)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+collision_layer = 1
+position = Vector2(-8, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_2")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+collision_layer = 1
+position = Vector2(648, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_2")
+
+[node name="Player" parent="." instance=ExtResource("1")]
+position = Vector2(80, 180)
+
+[node name="Instructions" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 400.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 11
+text = "WASD = Move  |  SPACE = Attack  |  R = Restart"
+
+[node name="Objective" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 10
+text = "Objective: Defeat all skeletons!"
+
+[node name="LevelLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 540.0
+offset_top = 10.0
+offset_right = 630.0
+offset_bottom = 30.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "Level 1"
+horizontal_alignment = 2

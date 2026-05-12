@@ -1,0 +1,67 @@
+# Swordjin Godot Development Progress
+
+## Current Build Info
+- Engine: Godot 4.4.1-stable (GL Compatibility)
+- Target: Mobile PWA via HTML5 export
+- Resolution: 640×360 (scales to mobile)
+
+## Session: 2026-05-12
+
+### Completed This Session
+- [x] Godot project initialized with .gitignore
+- [x] Mobile touch controls (virtual joystick + ATK/SKILL buttons)
+  - Auto-detects mobile vs desktop
+  - Desktop hides controls, mobile shows overlays
+- [x] Chapter data system (JSON + MD pipeline)
+  - ChapterDatabase autoload loads from res://chapters/actNN/
+  - chapter001.md + chapter001.json for Act 1, Ch 1
+- [x] GameState autoload (save/load, XP, level, unlocks)
+  - Persistent JSON save in user://swordjin_save.json
+  - Level up system with quadratic XP curve
+  - Chapter completion tracking
+- [x] LevelManager script (loads chapter data, spawns enemies, tracks objectives)
+- [x] Main scene updated for dynamic chapter loading
+
+### Architecture
+Swordjin_Godot/
+├── project.godot              # Autoloads: GameState, ChapterDatabase
+├── scenes/
+│   ├── main.tscn             # LevelManager + player + walls
+│   ├── player.tscn           # CharacterBody2D, attack hitbox
+│   ├── skeleton.tscn         # Enemy AI with detection + attack
+│   └── mobile_controls.tscn  # Touch joystick + buttons
+├── scripts/
+│   ├── autoload/
+│   │   ├── game_state.gd     # Save/load, progression
+│   │   └── chapter_database.gd # JSON chapter loader
+│   ├── player.gd             # Input, combat, HP
+│   ├── skeleton.gd           # Chase AI, attack, death
+│   ├── level_manager.gd      # Chapter setup + objective tracking
+│   └── mobile_controls.gd    # Touch input mapping
+└── chapters/
+    └── act01/
+        ├── chapter001.json   # Data (enemies, dialogue, rewards)
+        └── chapter001.md     # Design doc
+
+### Current Stats
+| Component | Status |
+|-----------|--------|
+| Player movement + attack | ✅ |
+| Skeleton AI (chase + attack) | ✅ |
+| Mobile touch controls | ✅ |
+| Chapter data loading | ✅ |
+| Save/load system | ✅ |
+| PWA export | ⏳ Next |
+| HTML5 build pipeline | ⏳ Next |
+| Story/dialogue system | ⏳ Partial |
+| Sound | ⏳ None |
+| Art pipeline | ⏳ None |
+
+### Next Priority
+1. PWA export — verify HTML5 build on Packy
+2. Add dialogue system (label-based, tap to advance)
+3. Chapter 002 template
+4. Sound placeholders (generated SFX)
+5. SVG → PNG asset pipeline
+
+LAST_RUN=20260512_1116

@@ -1,0 +1,51 @@
+{
+  "chapter_id": "act01_ch001",
+  "title": "The Rusted Blade",
+  "act": 1,
+  "chapter": 1,
+  "type": "combat",
+  "playtime_estimate_minutes": 3,
+  "objective": "Defeat 4 skeletons",
+  "background_color": [0.08, 0.1, 0.12],
+  "enemies": [
+    {
+      "type": "skeleton",
+      "count": 4,
+      "positions": [
+        {"x": 280, "y": 120},
+        {"x": 480, "y": 250},
+        {"x": 400, "y": 80},
+        {"x": 550, "y": 160}
+      ],
+      "stats": {
+        "health": 30,
+        "speed": 80,
+        "damage": 8
+      }
+    }
+  ],
+  "dialogue": [
+    {
+      "speaker": "INNKEEPER",
+      "text": "They're in the western field! Skeletons! Dozens of them!",
+      "trigger": "start"
+    },
+    {
+      "speaker": "JIN",
+      "text": "That rusted thing won't cut butter... but it's all I have.",
+      "trigger": "start"
+    },
+    {
+      "speaker": "JIN",
+      "text": "Four down. How many more are coming?",
+      "trigger": "objective_complete"
+    }
+  ],
+  "rewards": {
+    "xp": 50,
+    "unlock_weapon": "broken_sword",
+    "unlock_chapter": "act01_ch002"
+  },
+  "next_chapter": "act01_ch002",
+  "is_unlocked": true
+}

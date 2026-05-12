@@ -1,0 +1,21 @@
+{
+  "name": "Swordjin - Fantasy Action RPG",
+  "short_name": "Swordjin",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#1a1a2e",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "icon_144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
