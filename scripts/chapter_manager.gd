@@ -121,7 +121,7 @@ func _on_back_button_pressed():
 func _update_progress():
 	var total = ChapterDatabase.chapters.size()
 	var done = GameState.completed_chapters.size()
-	progress_bar.value = total > 0 ? (float(done) / float(total)) * 100.0 : 0.0
+	progress_bar.value = (float(done) / float(total)) * 100.0 if total > 0 else 0.0
 	progress_bar.tooltip_text = "%d / %d chapters" % [done, total]
 
 func _on_continue_button_pressed():

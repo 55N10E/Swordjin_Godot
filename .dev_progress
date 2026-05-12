@@ -24,8 +24,9 @@
 - [x] Godot .uid files for new scripts
 
 ### Commits
-- **v0.30** `0b5a984` — Title screen, ChapterManager back hook, cleaner continue logic
-- **v0.29** `4fb093b` — Title screen scene + script
+- **v0.33** `CURRENT` — Fixed chapter_manager.gd ternary syntax (Godot 4.4 doesn't support `?:`)
+        - Regenerated SFX placeholders via generate_sfx.py + AudioManager .sample cache verified
+        - Headless build check: clean, zero parse errors
 - **v0.28** `08c0022` — Skeleton Captain, ChapterManager UI, AudioManager + 8 SFX placeholders
 
 ### Current Stats
@@ -43,8 +44,9 @@
 | AudioManager + SFX placeholders | ✅ Complete |
 | ChapterManager UI | ✅ Complete |
 | Title screen | ✅ v0.30 |
-| Sound | Partial — placeholders wired |
+| Sound | Partial — placeholders wired, fix needed |
 | Art pipeline | None |
+| Parse errors | 0 (clean headless check) |
 
 ### Next Priority
 1. Replace placeholder SFX with real generated/processed assets
@@ -52,4 +54,4 @@
 3. BGM placeholder / ambient track
 4. Push to GitHub/Codeberg
 
-LAST_RUN=20260512_1413
+LAST_RUN=20260512_1614
