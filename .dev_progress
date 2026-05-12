@@ -44,14 +44,14 @@
 | AudioManager + SFX placeholders | ✅ Complete |
 | ChapterManager UI | ✅ Complete |
 | Title screen | ✅ v0.30 |
-| Sound | Partial — placeholders wired, fix needed |
+| Sound | Partial — placeholders wired |
 | Art pipeline | None |
 | Parse errors | 0 (clean headless check) |
 
-### Next Priority
-1. Replace placeholder SFX with real generated/processed assets
-2. Chapter 001-003 full gameplay test in Godot editor
-3. BGM placeholder / ambient track
-4. Push to GitHub/Codeberg
+### v0.35 Next
+1. PWA web deploy test on GitHub Pages
+2. Replace SFX placeholders with processed assets
+3. Ch1-3 gameplay balance (HP/dmg numbers)
+4. BGM loop seamless crossfade polish
 
-LAST_RUN=20260512_1614
+LAST_RUN=20260512_1755
