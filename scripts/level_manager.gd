@@ -6,6 +6,7 @@ extends Node2D
 
 var chapter_data: Dictionary = {}
 var enemies_remaining := 0
+var dialogue_triggered := {}
 
 func _ready():
 	# Load chapter 001 by default
@@ -24,6 +25,15 @@ func _ready():
 	if mobile_scene:
 		add_child(mobile_scene.instantiate())
 	
+	# Add dialogue manager (from packed scene)
+	var dlg_scene = load("res://scenes/dialogue_manager.tscn")
+	if dlg_scene:
+		var dlg_instance = dlg_scene.instantiate()
+		dlg_instance.name = "DialogueManager"
+		add_child(dlg_instance)
+	
+	_dialogue_start()
+	
 	# Update UI
 	$Objective.text = "Objective: " + chapter_data.get("objective", "Defeat enemies!")
 	$LevelLabel.text = chapter_data.get("title", "Level 1")
@@ -33,6 +43,24 @@ func _ready():
 	$ColorRect.color = Color(bg[0], bg[1], bg[2])
 	
 	print("Chapter loaded: %s" % chapter_data.get("title", "?"))
+
+func _dialogue_start():
+	var dlg = get_node("DialogueManager")
+	if not dlg:
+		dialogue_triggered["start"] = true
+		return
+	var dialogue = chapter_data.get("dialogue", [])
+	if not dialogue.is_empty():
+		dlg.load_dialogue(dialogue)
+		dlg.dialogue_ended.connect(_on_dialogue_ended_start, CONNECT_ONE_SHOT)
+		await get_tree().create_timer(0.5).timeout
+		dlg.play_dialogue_for_trigger("start")
+	else:
+		# No dialogue, enable combat immediately
+		dialogue_triggered["start"] = true
+
+func _on_dialogue_ended_start():
+	dialogue_triggered["start"] = true
 
 func _setup_level():
 	# Clear existing skeletons
@@ -87,6 +115,8 @@ func _process(_delta):
 	# Check chapter complete condition
 	if chapter_data.is_empty():
 		return
+	if not dialogue_triggered.get("start", false):
+		return  # Wait for start dialogue to finish
 	
 	if chapter_data.get("type", "combat") == "combat":
 		var live_enemies := 0
@@ -95,18 +125,41 @@ func _process(_delta):
 				live_enemies += 1
 		
 		if live_enemies == 0 and enemies_remaining > 0:
-			_objective_complete()
 			enemies_remaining = 0  # Prevent double-trigger
+			_objective_complete()
 
 func _objective_complete():
+	# Handle "objective_complete" dialogue trigger
+	var dlg = get_node("DialogueManager")
+	var dialogue = chapter_data.get("dialogue", [])
+	var has_completion_dialogue = false
+	for entry in dialogue:
+		if entry.get("trigger", "") == "objective_complete":
+			has_completion_dialogue = true
+			break
+	
+	if has_completion_dialogue and dlg:
+		dlg.load_dialogue(dialogue)
+		dlg.play_dialogue_for_trigger("objective_complete")
+		dlg.dialogue_ended.connect(_on_objective_dialogue_done, CONNECT_ONE_SHOT)
+	else:
+		_finish_chapter_complete()
+
+func _on_objective_dialogue_done():
+	_finish_chapter_complete()
+
+func _finish_chapter_complete():
 	print("Chapter complete! Loading next...")
 	GameState.complete_current_chapter()
 	
-	# Show completion dialog
-	$Objective.text = "COMPLETED! — Press R to restart"
+	# Check if there's a next chapter
+	var next = chapter_data.get("next_chapter", "")
+	if not next.is_empty():
+		ChapterDatabase.set_current_chapter(next)
+		$Objective.text = "CHAPTER COMPLETE — Press R to continue"
+	else:
+		$Objective.text = "CHAPTER COMPLETE! — Press R to restart"
 	$Objective.modulate = Color.GREEN
-	
-	# Auto-save is done in GameState
 	
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:

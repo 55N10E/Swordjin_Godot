@@ -21,27 +21,42 @@
   - Chapter completion tracking
 - [x] LevelManager script (loads chapter data, spawns enemies, tracks objectives)
 - [x] Main scene updated for dynamic chapter loading
+- [x] Dialogue system — typewriter effect, tap/click/space advance
+  - DialogueManager as CanvasLayer + PackedScene
+  - Triggers: "start" (blocks combat until dialogue ends), "objective_complete"
+  - Shows "[TAP TO CONTINUE]" on mobile, "[PRESS SPACE / CLICK]" on desktop
+- [x] Chapter 002: "The Merchant's Plea" — JSON + MD design doc added
+  - Merchant ally NPC (with follow_distance, dialogue entries)
+  - Weapon unlock flow (steel_dagger)
+  - Continues chapter chain (act01_ch003)
+- [x] Chapter completion flow now loads next chapter data properly
+  - Unlocks next chapter in GameState
+  - Objective label shows "CHAPTER COMPLETE — Press R to continue"
 
 ### Architecture
 Swordjin_Godot/
 ├── project.godot              # Autoloads: GameState, ChapterDatabase
 ├── scenes/
-│   ├── main.tscn             # LevelManager + player + walls
+│   ├── main.tscn             # LevelManager + player + walls + DialogueManager
 │   ├── player.tscn           # CharacterBody2D, attack hitbox
 │   ├── skeleton.tscn         # Enemy AI with detection + attack
-│   └── mobile_controls.tscn  # Touch joystick + buttons
+│   ├── mobile_controls.tscn  # Touch joystick + buttons
+│   └── dialogue_manager.tscn # CanvasLayer (Panel, Labels)
 ├── scripts/
 │   ├── autoload/
 │   │   ├── game_state.gd     # Save/load, progression
 │   │   └── chapter_database.gd # JSON chapter loader
 │   ├── player.gd             # Input, combat, HP
 │   ├── skeleton.gd           # Chase AI, attack, death
-│   ├── level_manager.gd      # Chapter setup + objective tracking
-│   └── mobile_controls.gd    # Touch input mapping
+│   ├── level_manager.gd      # Chapter setup + objective tracking + dialogue
+│   ├── mobile_controls.gd    # Touch input mapping
+│   └── dialogue_manager.gd   # Typewriter dialogue system
 └── chapters/
     └── act01/
         ├── chapter001.json   # Data (enemies, dialogue, rewards)
-        └── chapter001.md     # Design doc
+        ├── chapter001.md     # Design doc
+        ├── chapter002.json   # Merchant ally, steel dagger unlock
+        └── chapter002.md     # Design doc
 
 ### Current Stats
 | Component | Status |
@@ -51,17 +66,19 @@ Swordjin_Godot/
 | Mobile touch controls | ✅ |
 | Chapter data loading | ✅ |
 | Save/load system | ✅ |
+| Dialogue system | ✅ Typewriter, triggers, tap advance |
+| Chapter 002 template | ✅ Added |
+| Chapter completion → next chapter | ✅ |
 | PWA export | ⏳ Next |
 | HTML5 build pipeline | ⏳ Next |
-| Story/dialogue system | ⏳ Partial |
 | Sound | ⏳ None |
 | Art pipeline | ⏳ None |
 
 ### Next Priority
 1. PWA export — verify HTML5 build on Packy
-2. Add dialogue system (label-based, tap to advance)
-3. Chapter 002 template
-4. Sound placeholders (generated SFX)
-5. SVG → PNG asset pipeline
+2. Chapter 003 template
+3. Sound placeholders (generated SFX)
+4. SVG → PNG asset pipeline
+5. ChapterManager UI (chapter select screen)
 
-LAST_RUN=20260512_1116
+LAST_RUN=20260512_1125
