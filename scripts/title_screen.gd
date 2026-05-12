@@ -1,5 +1,6 @@
 extends Control
 # TitleScreen — Entry point: start, continue, chapter select
+# ChapterManager is embedded; its Start button already changes scene to main.tscn
 
 @onready var start_btn = $CenterContainer/VBoxContainer/StartButton
 @onready var continue_btn = $CenterContainer/VBoxContainer/ContinueButton
@@ -7,27 +8,20 @@ extends Control
 @onready var chm = $ChapterManager
 
 func _ready():
-	# Setup focus navigation
 	start_btn.grab_focus()
 	
-	# Enable/disable continue based on saved state
-	continue_btn.disabled = GameState.completed_chapters.is_empty()
-	if continue_btn.disabled:
+	# Disable continue if no progress
+	if GameState.completed_chapters.is_empty():
+		continue_btn.disabled = true
 		continue_btn.modulate = Color.GRAY
-	
-	# Hook ChapterManager start signal
-	chm._on_start_button_pressed = func():
-		get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_start_pressed():
-	# Start from first chapter
 	ChapterDatabase.set_current_chapter("act01_ch001")
 	GameState.reset_chapter_state()
 	AudioManager.play_sfx("ui_click")
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_continue_pressed():
-	# Load most recent progress
 	var id = _get_last_chapter()
 	ChapterDatabase.set_current_chapter(id)
 	GameState.reset_chapter_state()
@@ -37,9 +31,17 @@ func _on_continue_pressed():
 func _on_select_pressed():
 	AudioManager.play_sfx("ui_click")
 	chm.show_manager()
+	# Hide our buttons while chapter manager is open
+	$CenterContainer.visible = false
+	# Re-show when back is pressed
+	var back_btn = chm.get_node("MarginContainer/VBoxContainer/HBoxContainer/BackButton")
+	back_btn.pressed.connect(_on_chapter_back, CONNECT_ONE_SHOT)
+
+func _on_chapter_back():
+	$CenterContainer.visible = true
+	start_btn.grab_focus()
 
 func _get_last_chapter() -> String:
-	# Return last completed or in-progress chapter
 	if GameState.completed_chapters.is_empty():
 		return "act01_ch001"
 	var last_id := ""
@@ -50,7 +52,6 @@ func _get_last_chapter() -> String:
 		if ch_num >= last_chapter:
 			last_chapter = ch_num
 			last_id = id
-	# Return the NEXT chapter after last completed
 	var next = ChapterDatabase.chapters.get(last_id, {}).get("next_chapter", "")
 	if not next.is_empty():
 		return next
