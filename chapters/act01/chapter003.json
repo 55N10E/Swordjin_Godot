@@ -1,0 +1,56 @@
+{
+  "chapter_id": "act01_ch003",
+  "title": "The Iron Gate",
+  "act": 1,
+  "chapter": 3,
+  "type": "combat",
+  "playtime_estimate_minutes": 3,
+  "objective": "Defeat the skeleton captain and his guards",
+  "background_color": [0.15, 0.12, 0.08],
+  "enemies": [
+    {
+      "type": "skeleton",
+      "count": 3,
+      "positions": [
+        {"x": 280, "y": 100},
+        {"x": 520, "y": 220},
+        {"x": 400, "y": 300}
+      ],
+      "stats": {
+        "health": 35,
+        "speed": 80,
+        "damage": 8
+      }
+    },
+    {
+      "type": "skeleton_captain",
+      "count": 1,
+      "positions": [
+        {"x": 600, "y": 120}
+      ],
+      "stats": {
+        "health": 80,
+        "speed": 65,
+        "damage": 15
+      }
+    }
+  ],
+  "dialogue": [
+    {
+      "speaker": "JIN",
+      "text": "That dagger cuts cleaner. But it's not the blade that kills — it's the hand.",
+      "trigger": "start"
+    },
+    {
+      "speaker": "JIN",
+      "text": "The captain's down. The gate should be clear now.",
+      "trigger": "objective_complete"
+    }
+  ],
+  "rewards": {
+    "xp": 100,
+    "unlock_chapter": "act01_ch004"
+  },
+  "next_chapter": "act01_ch004",
+  "is_unlocked": false
+}
