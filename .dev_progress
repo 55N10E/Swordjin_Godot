@@ -7,7 +7,16 @@
 
 ## Session: 2026-05-12 v0.50
 
+## Session: 2026-05-13 v0.51
+
 ### Completed This Session
+- [x] Merchant ally scene + script for Ch2 "The Merchant's Plea"
+  - `scenes/merchant_ally.tscn` — CharacterBody2D, green polygon, collision, dialogue label
+  - `scripts/merchant_ally.gd` — follows player (80px distance), heals 10HP/5s, floating dialogue, invulnerable
+  - `scripts/level_manager.gd` — preloads merchant_scene, spawns allies from chapter data, reads dialogue dict
+- [x] SecDev PLUGIN-01 — Dynamic plugin loading verified: 2 plugins load, hooks register, dispatch works
+
+### Previous (v0.28-v0.50)
 - [x] Ch1-3 gameplay balance pass — damage up across the board
   - Ch1: skeletons 8 dmg → 10 dmg, HP stays at 35 (harder)
   - Ch2: skeletons 10 dmg → 12 dmg, HP 45 (unchanged)
@@ -18,25 +27,25 @@
 - [x] Pushed both repos (Swordjin + SecDev) to GitHub
 - [x] SecDev: WebSocket event pipeline (WS-01), role-based access (AUTH-02), real Prometheus metrics (MON-01)
 
-### Previous (v0.28-v0.49)
-- [x] Skeleton Captain scene + script (shield, charge, counterattack)
-- [x] ChapterManager UI (act tabs, chapter grid, progress bar)
-- [x] AudioManager autoload (8-channel pool, random pitch, volume)
-- [x] 8 placeholder WAV SFX generated via Python
-- [x] Sound triggers wired into player, skeleton, captain, level_manager
-- [x] Title screen → ChapterManager → main.tscn flow
-- [x] Continue button uses save progress (completed_chapters)
-- [x] Project main_scene switched to title_screen.tscn
-- [x] Title screen has back button hook from ChapterManager
-- [x] BGM placeholders + AudioManager crossfade
-- [x] PWA export pipeline complete
-- [x] README added
-
 ### Current Stats
 | Component | Status |
 |-----------|--------|
 | Player movement + attack | Working |
 | Skeleton AI (chase + attack) | Working |
+| Skeleton Captain (shield, charge) | Working |
+| Merchant ally (follow, heal, dialogue) | Working |
+| Mobile touch controls | Working |
+| Chapter JSON data system | Working |
+| Save/load (GameState) | Working |
+| Dialogue system | Working |
+| Chapter completion flow | Working |
+| PWA export pipeline | Working |
+| AudioManager + 8 SFX placeholders | Working |
+| ChapterManager UI | Working |
+| Title screen | Working |
+| Sound | Placeholder |
+| Art pipeline | None |
+| Parse errors | 0 |
 | Skeleton Captain (shield + charge) | ✅ Complete |
 | Mobile touch controls | Working |
 | Chapter data system (JSON) | Working |
