@@ -109,3 +109,34 @@ LAST_RUN=20260513_0617
 ### Commit: `a97fab5`
 
 LAST_RUN=20260513_0446
+
+
+---
+
+# v0.57 — Hit-Stop (Freeze Frames on Impact)
+
+### New Files
+- `scripts/hit_stop.gd` — Global HitStop autoload
+  - `trigger(ms)` pauses `Engine.time_scale = 0` for N milliseconds
+  - Accumulates freeze time if triggered again while frozen (combo feel)
+  - `trigger_light()` = 80ms default, `trigger_heavy()` = 150ms
+  - Capped at `max_freeze_ms` (250ms) to prevent stunlock
+  - Uses `get_tree().create_timer(..., true)` with physics process
+
+### Updated
+- `project.godot` — added HitStop to `[autoload]` alongside ScreenShake
+- `scripts/player.gd` — HitStop on take_damage (light/heavy) + on attack hit
+- `scripts/skeleton.gd` — HitStop on attack_hitbox body_entered
+- `scripts/skeleton_captain.gd` — HitStop.heavy() on attack_hitbox connect
+- `scripts/arrow.gd` — HitStop on player hit
+
+### Design Rationale
+- Freeze frames make impacts feel weightier without changing any damage numbers
+- Light freeze on normal hits (80ms), heavy on big hits (150ms)
+- Combo accumulation prevents rapid-fire attacks from feeling weaker
+- 250ms cap keeps game responsive — never freezes longer than 1/4 second
+
+### Zero Parse Errors ✅
+### Commit: `b99b903`
+
+LAST_RUN=20260513_0953
