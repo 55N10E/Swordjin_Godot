@@ -1,6 +1,8 @@
 extends CharacterBody2D
 # SkeletonArcher — Ranged enemy: keeps distance, fires projectiles
 
+var damage_number_scene = preload("res://scenes/ui/damage_number.tscn")
+
 @export var max_health := 25
 @export var speed := 70.0
 @export var detection_range := 300.0
@@ -122,6 +124,8 @@ func take_damage(amount: int):
 	if is_dead:
 		return
 	
+	show_damage_number(amount)
+	
 	health -= amount
 	_update_label()
 	
@@ -133,6 +137,12 @@ func take_damage(amount: int):
 	
 	if health <= 0:
 		_die()
+
+func show_damage_number(amount: int):
+	var dn = damage_number_scene.instantiate() as Node2D
+	dn.global_position = global_position + Vector2(0, -24)
+	get_tree().current_scene.add_child(dn)
+	dn.setup(amount)
 
 func _update_label():
 	if label:

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var damage_number_scene = preload("res://scenes/ui/damage_number.tscn")
+
 @export var max_health := 30
 @export var speed := 80.0
 @export var detection_range := 250.0
@@ -93,6 +95,7 @@ func take_damage(amount: int):
 	
 	health -= amount
 	_update_label()
+	show_damage_number(amount)
 	
 	AudioManager.play_random_pitch("sword_hit", 0.9, 1.1)
 	
@@ -104,6 +107,12 @@ func take_damage(amount: int):
 	
 	if health <= 0:
 		_die()
+
+func show_damage_number(amount: int):
+	var dn = damage_number_scene.instantiate() as Node2D
+	dn.global_position = global_position + Vector2(0, -24)
+	get_tree().current_scene.add_child(dn)
+	dn.setup(amount)
 
 func _update_label():
 	if label:

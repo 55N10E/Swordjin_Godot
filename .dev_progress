@@ -33,3 +33,30 @@
 
 
 LAST_RUN=20260513_0410
+
+
+# v0.54 — Floating Damage Numbers
+
+### New Files
+- `scenes/ui/damage_number.tscn` + `scripts/damage_number.gd` — Floating damage/heal numbers
+  - Spawns on hit, floats up, fades out over 0.9s
+  - Random horizontal offset to prevent stacking
+  - Red = damage, Green = heal, Gold = blocked (shield)
+  - z_index=20 so it renders above units
+
+### Updated
+- `scripts/player.gd` — `show_damage_number()` on take_damage and merchant_heal
+- `scripts/skeleton.gd` — `show_damage_number()` on take_damage
+- `scripts/skeleton_captain.gd` — `show_damage_number()` on take_damage (skips if shield blocks)
+- `scripts/skeleton_archer.gd` — `show_damage_number()` on take_damage
+- Arrow projectile already calls `player.take_damage()`, numbers show automatically
+
+### Visual Polish
+- Damage numbers appear on all combatants: player, skeleton, captain, archer
+- Player shows green heal numbers when merchant heals
+- Shield block shows no damage number (gold flash = clear feedback)
+
+### Zero Parse Errors ✅ (manual review)
+### Commit: TBD
+
+LAST_RUN=20260513_0427

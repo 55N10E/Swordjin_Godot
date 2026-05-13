@@ -2,6 +2,9 @@ extends CharacterBody2D
 # SkeletonCaptain — Boss variant with shield + charge attack
 # Inherits base skeleton behavior, adds captain mechanics
 
+var damage_number_scene = preload("res://scenes/ui/damage_number.tscn")
+
+
 @export var max_health := 80
 @export var speed := 65.0
 @export var detection_range := 280.0
@@ -120,6 +123,15 @@ func _end_attack():
 	attack_hitbox.disabled = true
 	velocity = Vector2.ZERO
 
+func show_damage_number(amount: int, is_heal := false):
+	var dn = damage_number_scene.instantiate() as Node2D
+	dn.global_position = global_position + Vector2(0, -24)
+	get_tree().current_scene.add_child(dn)
+	if is_heal:
+		dn.setup_heal(amount)
+	else:
+		dn.setup(amount)
+
 func take_damage(amount: int):
 	if is_dead:
 		return
@@ -139,6 +151,8 @@ func take_damage(amount: int):
 		print("Captain blocked!")
 		return
 	
+	show_damage_number(amount)
+	
 	health -= amount
 	_update_label()
 	
@@ -150,6 +164,13 @@ func take_damage(amount: int):
 	
 	if health <= 0:
 		_die()
+
+		dn.global_position = global_position + Vector2(0, -24)
+		get_tree().current_scene.add_child(dn)
+		if is_heal:
+			dn.setup_heal(amount)
+		else:
+			dn.setup(amount)
 
 func _update_shield_visual():
 	shield_sprite.visible = shield_charges > 0
