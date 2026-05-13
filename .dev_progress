@@ -5,48 +5,28 @@
 - Target: Mobile PWA via HTML5 export
 - Resolution: 640x360 (scales to mobile)
 
-## v0.52 (In Progress)
+# v0.52 WIP — Skeleton Archer Added
 
-### Completed This Session (Heartbeat)
-- [x] SFX v2: regenerated all 8 placeholders at 44.1kHz with layered synthesis
-  - `scripts/generate_sfx_v2.py` — whoosh, filtered noise, pulse, metallic ring synthesis
-  - Higher fidelity: bandpass-like filtered noise, harmonic shimmer, decay envelopes
-  - All assets committed and pushed (`b155ad0`)
-- [x] Godot reimport: AudioStreamWAV `.sample` files regenerated
+### New Files
+- `scripts/skeleton_archer.gd` + `scenes/skeleton_archer.tscn` — Ranged enemy
+  - Keeps optimal distance (~170px), retreats if player too close
+  - Yellow telegraph before firing, windup timer in _physics_process (no race)
+  - Arrow projectile scene + script: flies straight, hits player or walls
+  - Weak melee bash (60% arrow damage) if player enters melee hitbox
+  - HP 25, speed 70, arrow damage 7, fire cooldown 2s
+- `scripts/arrow.gd` + `scenes/projectiles/arrow.tscn` — Projectile
+  - Direction + speed + damage parameters, 3s lifetime, auto-cleanup
+  - Hits player → deals damage, hits wall → plays impact SFX
+- `scripts/generate_arrow_sfx.py` — Bow fire + arrow hit + impact WAVs
+- 3x new SFX added to AudioManager: `bow_fire`, `arrow_hit`, `arrow_impact`
 
-### Previous (v0.28-v0.51)
-- [x] Ch1-3 gameplay balance pass — damage up across the board
-- [x] Merchant ally scene + script (follow, heal, dialogue, invulnerable)
-- [x] BGM theme01_ambience (30s procedural loop) + gen_bgm.py
-- [x] Full PWA export + GitHub Pages deploy
-- [x] Title screen v0.30
-- [x] ChapterManager UI + AudioManager
+### Modified
+- `level_manager.gd` — spawns archers from chapter JSON (type: "skeleton_archer")
+- `audio_manager.gd` — loads +3 new SFX (total 11)
+- `chapter002.json` — 2 melee skeletons + 1 archer (replacing 3 melee)
 
-### Current Stats
-| Component | Status |
-|-----------|--------|
-| Player movement + attack | ✅ |
-| Skeleton AI (chase + attack) | ✅ |
-| Skeleton Captain (shield, charge) | ✅ |
-| Merchant ally (follow, heal, dialogue) | ✅ |
-| Mobile touch controls | ✅ |
-| Chapter JSON data system | ✅ |
-| Save/load (GameState) | ✅ |
-| Dialogue system | ✅ |
-| Chapter completion flow | ✅ |
-| PWA export pipeline | ✅ |
-| ChapterManager UI | ✅ |
-| Title screen | ✅ v0.30 |
-| SFX | ✅ v2 (44.1kHz layered) |
-| BGM | ✅ theme01_ambience |
-| Parse errors | 0 |
-| Art pipeline | ⏳ Deferred |
+### Zero Parse Errors ✅
+### Commit: TBD
 
-### v0.52 Next
-1. Add enemy variety (ranged skeleton archer?)
-2. BGM crossfade between title/battle/ambience
-3. Ch4-5 placeholder scenes
-4. Web build test with new audio assets
-5. Title screen polish (animated background?)
 
 LAST_RUN=20260513_0326

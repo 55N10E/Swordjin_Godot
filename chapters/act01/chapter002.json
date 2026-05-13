@@ -10,16 +10,27 @@
   "enemies": [
     {
       "type": "skeleton",
-      "count": 3,
+      "count": 2,
       "positions": [
         {"x": 320, "y": 100},
-        {"x": 500, "y": 200},
-        {"x": 150, "y": 180}
+        {"x": 500, "y": 200}
       ],
       "stats": {
         "health": 45,
         "speed": 85,
         "damage": 12
+      }
+    },
+    {
+      "type": "skeleton_archer",
+      "count": 1,
+      "positions": [
+        {"x": 480, "y": 80}
+      ],
+      "stats": {
+        "health": 25,
+        "speed": 70,
+        "damage": 7
       }
     }
   ],

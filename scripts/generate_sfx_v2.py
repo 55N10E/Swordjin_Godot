@@ -142,3 +142,29 @@ click += [s * 0.5 for s in sine_tone(1800, 0.01, 0.15)]
 write_wav("ui_click.wav", click)
 
 print("✅ All SFX v2 generated with higher quality (44.1kHz) in", OUTPUT_DIR)
+
+# === New SFX: Arrow sounds ===
+
+# Bow Fire (string twang + airy release)
+bow_fire = []
+bow_fire += tone_with_decay(220, 0.05, 0.4, 1.5)   # low twang
+bow_fire += tone_with_decay(440, 0.03, 0.3, 1.0)     # high twang
+bow_fire += filtered_noise(0.06, 2000, amplitude=0.25)  # airy release
+bow_fire += [s * 0.15 for s in whoosh(0.08, 0.3)]      # arrow launch whoosh
+write_wav("bow_fire.wav", bow_fire)
+
+# Arrow Hit (sharp thud + wood crack)
+arrow_hit = []
+arrow_hit += filtered_noise(0.02, 3500, amplitude=0.5)  # sharp transient
+arrow_hit += tone_with_decay(400, 0.04, 0.35, 2.0)       # thud
+arrow_hit += tone_with_decay(800, 0.02, 0.2, 1.5)        # crack
+write_wav("arrow_hit.wav", arrow_hit)
+
+# Arrow Impact (duller — wall/floor hit)
+arrow_impact = []
+arrow_impact += filtered_noise(0.03, 1200, amplitude=0.35)  # body
+arrow_impact += tone_with_decay(250, 0.06, 0.3, 1.8)           # sub thud
+arrow_impact += [s * 0.1 for s in filtered_noise(0.02, 5000, amplitude=0.2)]  # debris
+write_wav("arrow_impact.wav", arrow_impact)
+
+print("✅ +3 arrow SFX generated with higher quality (44.1kHz) in", OUTPUT_DIR)

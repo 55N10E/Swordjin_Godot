@@ -4,6 +4,7 @@ extends Node2D
 @onready var player = $Player
 @onready var skeleton_scene = preload("res://scenes/skeleton.tscn")
 @onready var captain_scene = preload("res://scenes/skeleton_captain.tscn")
+@onready var archer_scene = preload("res://scenes/skeleton_archer.tscn")
 @onready var merchant_scene = preload("res://scenes/merchant_ally.tscn")
 
 var chapter_data: Dictionary = {}
@@ -120,6 +121,8 @@ func _spawn_enemy(type: String, pos: Vector2, stats: Dictionary):
 	var inst: CharacterBody2D
 	if type == "skeleton_captain":
 		inst = captain_scene.instantiate()
+	elif type == "skeleton_archer":
+		inst = archer_scene.instantiate()
 	else:
 		inst = skeleton_scene.instantiate()
 		
