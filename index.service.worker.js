@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1778632705|41753333';
+const CACHE_VERSION = '1778636114|42940111';
 /** @type {string} */
 const CACHE_PREFIX = 'Swordjin-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
