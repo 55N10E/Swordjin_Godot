@@ -31,6 +31,7 @@ attack={"deadzone":0.5,"events":[Object(InputEventKey,"resource_local_to_scene":
 GameState="*res://scripts/autoload/game_state.gd"
 ChapterDatabase="*res://scripts/autoload/chapter_database.gd"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
+ScreenShake="*res://scripts/screen_shake.gd"
 
 [rendering]
 renderer/rendering_method="gl_compatibility"

@@ -32,6 +32,15 @@ collision_mask = 4
 position = Vector2(16, 0)
 shape = SubResource("CircleShape2D_1")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+groups = ["main_camera"]
+limit_left = -100
+limit_top = -100
+limit_right = 740
+limit_bottom = 460
+editor_draw_limits = true
+editor_draw_screen = true
+
 [node name="HealthBar" parent="." instance=ExtResource("2_healthbar")]
 position = Vector2(0, -30)
 

@@ -73,6 +73,12 @@ func take_damage(amount: int):
 	_update_label()
 	show_damage_number(amount)
 	
+	# Screen shake on heavy hits
+	if amount >= 8:
+		ScreenShake.shake(3.0, 0.3)
+	elif amount >= 5:
+		ScreenShake.shake(1.5, 0.2)
+	
 	AudioManager.play_sfx("player_hurt")
 	
 	# Flash red
