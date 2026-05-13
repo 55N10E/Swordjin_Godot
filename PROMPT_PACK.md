@@ -12,6 +12,7 @@ Genre: Wuxia-themed hack-and-slash with chapter-based progression.
 - **Dialogue system** (`dialogue_manager.gd` 115 lines): Typewriter text, trigger-based (start/objective_complete), auto-advance. Works.
 - **Mobile controls** (`mobile_controls.gd` 103 lines): Virtual joystick + attack/skill buttons, auto-detects touch. Works.
 - **Audio system** (`audio_manager.gd` autoload): SFX pool with pitch variation, BGM crossfade, volume control. Works.
+- **Gate mechanic** (`iron_gate.gd`): Iron Gate scene for Ch004 — blocks exit until captain drops key, player touches gate to open. Works.
 - **Juice** (`screen_shake.gd`, `hit_stop.gd`, `damage_number.gd`): Screen shake on heavy hits, freeze frames, floating damage numbers. Works.
 - **Chapter data** (ch001–ch003 JSON): Enemy layouts, stats, dialogue triggers, rewards. Structured and complete.
 - **Merchant ally** (`merchant_ally.gd` 66 lines): Follows player, heals periodically, combat dialogue. Works.
