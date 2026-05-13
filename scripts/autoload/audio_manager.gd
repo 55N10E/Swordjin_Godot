@@ -144,7 +144,8 @@ func play_bgm(name: String, fade_duration: float = 1.0, loop: bool = true):
 	
 	# Prepare next
 	next_player.stream = bgm_cache[name]
-	next_player.stream.loop = loop
+	if next_player.stream is AudioStreamWAV:
+		next_player.stream.loop_mode = AudioStreamWAV.LOOP_FORWARD if loop else AudioStreamWAV.LOOP_DISABLED
 	next_player.volume_db = linear_to_db(0.001)
 	next_player.stream_paused = false
 	next_player.play()
