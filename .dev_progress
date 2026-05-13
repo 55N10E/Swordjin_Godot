@@ -61,6 +61,33 @@ LAST_RUN=20260513_0410
 
 LAST_RUN=20260513_0427
 
+---
+
+# v0.56 — Screen Shake on Heavy Hits + Camera2D
+
+### New Files
+- `scripts/camera_shake.gd` — Reusable Camera2D shake component
+  - Triggered on heavy hits (player or captain attacks)
+  - Trauma decay over time with optional frequency
+  - Configurable intensity and duration per source
+  - Singleton-like access via `get_tree().root.get_camera_2d()
+
+### Updated
+- `scenes/game.tscn` / chapter scenes — added Camera2D node with camera_shake.gd
+- `scripts/player.gd` — calls `camera.shake()` on heavy attack land
+- `scripts/skeleton_captain.gd` — calls `camera.shake()` on shield bash / charge impact
+- `scripts/skeleton_archer.gd` — light shake on arrow hit
+
+### Visual Polish
+- Impact feedback: screen shake on heavy hits makes combat feel weightier
+- Camera stays at 640×360, shake applied as offset (no resolution change)
+- Different trauma levels: player heavy = 0.6s @ 0.4, captain charge = 0.8s @ 0.5, arrow = 0.3s @ 0.2
+
+### Zero Parse Errors ✅ (Godot 4.4.1 headless build check)
+### Commit: `d88ad98`
+
+LAST_RUN=20260513_0617
+
 
 ---
 
