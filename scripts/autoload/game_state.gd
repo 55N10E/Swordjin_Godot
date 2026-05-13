@@ -120,11 +120,18 @@ func reset_chapter_state():
 	chapter_kills = 0
 	chapter_objectives_met.clear()
 
-# Web export: try to sync to IndexedDB
+# Web export: ensure immediate flush to IndexedDB persistence
 func _save_indexeddb():
-	if OS.has_feature("web"):
-		# JavaScript Bridge for IndexedDB persistence
-		pass  # Godot 4 HTML5 handles FS persistence automatically
+	if OS.has_feature("web") and OS.has_feature("wasm"):
+		# Godot's VFS persists on page unload, but we force a sync now
+		JavaScriptBridge.eval("""
+			if (typeof Module !== 'undefined' && Module.FS && Module.FS.syncfs) {
+				Module.FS.syncfs(false, function(err) {
+					if (err) console.error('Save sync error:', err);
+				});
+			}
+		""")
+		print("IndexedDB sync requested")
 
 class ChapterProgress:
 	var chapter_id: String
