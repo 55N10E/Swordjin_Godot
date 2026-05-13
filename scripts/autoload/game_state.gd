@@ -22,18 +22,21 @@ var unlocked_weapons: Array = []
 var unlocked_skills: Array = []
 var equipped_weapon: String = "broken_sword"  # default starting weapon
 
+# Gate Key mechanic (Ch004)
+var has_gate_key := false
+
 # Chapter State (runtime only)
 var chapter_kills: int = 0
 var chapter_objectives_met: Dictionary = {}
 var is_paused: bool = false
 
-# v0.58 — health persistence (so "Continue" restores HP too)
+# v0.58 — health persistence (so "Continue" works correctly)
 var saved_health: int = 100
 var saved_max_health: int = 100
 
 func _ready():
 	load_game()
-	print("GameState loaded — Act %d, Chapter %d, Level %d" % [current_act, current_chapter, player_level])
+	print("GameState loaded — Act %d, Chapter %d, Level %d, key=%s" % [current_act, current_chapter, player_level, has_gate_key])
 
 func save_game():
 	var data := {
@@ -48,7 +51,8 @@ func save_game():
 		"unlocked_skills": unlocked_skills,
 		"equipped_weapon": equipped_weapon,
 		"saved_health": saved_health,
-		"saved_max_health": saved_max_health
+		"saved_max_health": saved_max_health,
+		"has_gate_key": has_gate_key
 	}
 	
 	var file := FileAccess.open(SAVE_FILE, FileAccess.WRITE)
@@ -93,7 +97,8 @@ func load_game():
 			equipped_weapon = "broken_sword"
 		saved_health = data.get("saved_health", 100)
 		saved_max_health = data.get("saved_max_health", 100)
-		print("Save loaded — HP %d/%d, weapon: %s" % [saved_health, saved_max_health, equipped_weapon])
+		has_gate_key = data.get("has_gate_key", false)
+		print("Save loaded — HP %d/%d, weapon: %s, key=%s" % [saved_health, saved_max_health, equipped_weapon, has_gate_key])
 
 func complete_current_chapter():
 	var chapter_id := "act%02d_ch%03d" % [current_act, current_chapter]

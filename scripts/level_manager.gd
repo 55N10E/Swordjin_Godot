@@ -6,6 +6,7 @@ extends Node2D
 @onready var captain_scene = preload("res://scenes/skeleton_captain.tscn")
 @onready var archer_scene = preload("res://scenes/skeleton_archer.tscn")
 @onready var merchant_scene = preload("res://scenes/merchant_ally.tscn")
+@onready var gate_scene = preload("res://scenes/iron_gate.tscn")
 
 var chapter_data: Dictionary = {}
 var enemies_remaining := 0
@@ -123,6 +124,15 @@ func _setup_level():
 					ally_inst._setup(lines)
 			add_child(ally_inst)
 	
+	# Gate spawning for ch004
+	var chapter_id = chapter_data.get("chapter_id", "")
+	if chapter_id == "act01_ch004" and gate_scene:
+		var gate = gate_scene.instantiate()
+		gate.position = Vector2(580, 180)
+		add_child(gate)
+		GameState.has_gate_key = false
+		$Objective.text = "Objective: Defeat defenders and open the gate!"
+	
 	enemies_remaining = 0
 	for child in get_children():
 		if child.is_in_group("enemy"):
@@ -173,8 +183,19 @@ func _process(_delta):
 				live_enemies += 1
 		
 		if live_enemies == 0 and enemies_remaining > 0:
-			enemies_remaining = 0  # Prevent double-trigger
-			_objective_complete()
+			# For ch004, wait for gate opening rather than auto-completing
+			var ch_id = chapter_data.get("chapter_id", "")
+			if ch_id == "act01_ch004":
+				enemies_remaining = 0
+				$Objective.text = "The defenders are dead. Open the gate!"
+			else:
+				enemies_remaining = 0
+				_objective_complete()
+
+func _on_gate_opened():
+	# Called by IronGate when player opens it with key
+	print("Gate opened! Completing chapter...")
+	_objective_complete()
 
 func _objective_complete():
 	# Handle "objective_complete" dialogue trigger
