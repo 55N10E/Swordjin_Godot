@@ -165,13 +165,6 @@ func take_damage(amount: int):
 	if health <= 0:
 		_die()
 
-		dn.global_position = global_position + Vector2(0, -24)
-		get_tree().current_scene.add_child(dn)
-		if is_heal:
-			dn.setup_heal(amount)
-		else:
-			dn.setup(amount)
-
 func _update_shield_visual():
 	shield_sprite.visible = shield_charges > 0
 	if label:
