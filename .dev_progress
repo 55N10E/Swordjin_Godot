@@ -60,3 +60,25 @@ LAST_RUN=20260513_0410
 ### Commit: TBD
 
 LAST_RUN=20260513_0427
+
+
+---
+
+# v0.55 — Web Save Sync (IndexedDB)
+
+### New Files
+- `scripts/gamestate.gd` — Enhanced GameState autoload
+  - Detects web platform automatically (`OS.has_feature("web")`)
+  - Saves to `localStorage` via `JavaScriptBridge` when on web
+  - Falls back to `user://` file on native builds
+  - Auto-syncs every 30 seconds during gameplay
+  - Syncs on scene changes and game pause
+
+### Updated
+- `project.godot` — GameState autoload persists across scenes
+- All chapter scenes call `GameState.save_game()` on completion
+
+### Zero Parse Errors ✅
+### Commit: `a97fab5`
+
+LAST_RUN=20260513_0446
