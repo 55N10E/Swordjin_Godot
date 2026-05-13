@@ -23,6 +23,8 @@ var is_dead := false
 @onready var label = $Label
 @onready var health_bar = $HealthBar
 
+var potion_scene = preload("res://scenes/potion_pickup.tscn")
+
 func _ready():
 	health = max_health
 	attack_hitbox.set_deferred("disabled", true)
@@ -125,6 +127,13 @@ func _die():
 	print("Skeleton defeated!")
 	
 	AudioManager.play_sfx("skeleton_death")
+	
+	# Drop potion (20% chance)
+	if randf() < 0.20:
+		var potion = potion_scene.instantiate()
+		potion.global_position = global_position
+		get_tree().current_scene.add_child(potion)
+		print("Potion dropped!")
 	
 	# Death animation placeholder
 	modulate = Color.DARK_GRAY

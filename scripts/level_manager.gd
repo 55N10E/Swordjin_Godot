@@ -192,7 +192,7 @@ func _finish_chapter_complete():
 	# Merchant heal if ally present
 	var allies = chapter_data.get("allies", [])
 	if not allies.is_empty():
-		player.merchant_heal(25)
+		player.heal(25)
 	
 	print("Chapter complete! Loading next...")
 	AudioManager.play_sfx("level_complete")

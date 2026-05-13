@@ -35,6 +35,8 @@ var charge_timer := 0.0
 @onready var label = $Label
 @onready var health_bar = $HealthBar
 
+var potion_scene = preload("res://scenes/potion_pickup.tscn")
+
 func _ready():
 	health = max_health
 	shield_charges = shield_max
@@ -180,6 +182,17 @@ func _die():
 	is_dead = true
 	print("Captain defeated!")
 	
+	# Drop potion (50% chance — captains are more generous)
+	if randf() < 0.50:
+		var potion = potion_scene.instantiate()
+		potion.global_position = global_position
+		get_tree().current_scene.add_child(potion)
+		print("Potion dropped!")
+	
+	# Always drop key on first kill
+	GameState.has_gate_key = true
+	print("Key acquired! Gate is open.")
+
 	modulate = Color.DARK_GRAY
 	velocity = Vector2.ZERO
 	

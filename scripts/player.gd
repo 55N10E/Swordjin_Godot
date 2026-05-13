@@ -111,7 +111,8 @@ func _update_label():
 	GameState.saved_health = health
 	GameState.saved_max_health = max_health
 
-func merchant_heal(amount: int):
+func heal(amount: int):
+	# Generic heal — used by potion pickups, merchant, etc.
 	if is_dead:
 		return
 	health = mini(health + amount, max_health)
@@ -122,6 +123,10 @@ func merchant_heal(amount: int):
 	await get_tree().create_timer(0.2).timeout
 	if not is_dead:
 		modulate = Color.WHITE
+
+# Backward-compat alias
+func merchant_heal(amount: int):
+	heal(amount)
 
 func show_damage_number(amount: int, is_heal := false):
 	var dn = damage_number_scene.instantiate() as Node2D

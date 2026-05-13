@@ -29,6 +29,8 @@ var is_winding_up := false
 @onready var fire_point = $FirePoint
 @onready var health_bar = $HealthBar
 
+var potion_scene = preload("res://scenes/potion_pickup.tscn")
+
 func _ready():
 	health = max_health
 	_update_label()
@@ -155,6 +157,13 @@ func _die():
 	print("Archer defeated!")
 	
 	AudioManager.play_sfx("skeleton_death")
+	
+	# Drop potion (20% chance)
+	if randf() < 0.20:
+		var potion = potion_scene.instantiate()
+		potion.global_position = global_position
+		get_tree().current_scene.add_child(potion)
+		print("Potion dropped!")
 	
 	modulate = Color.DARK_GRAY
 	velocity = Vector2.ZERO
