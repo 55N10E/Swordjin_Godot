@@ -57,8 +57,11 @@ func _ready():
 	var bg = chapter_data.get("background_color", [0.08, 0.1, 0.12])
 	$ColorRect.color = Color(bg[0], bg[1], bg[2])
 	
+	# Fade in from black
+	ScreenFader.fade_from_black(0.4)
+	
 	print("Chapter loaded: %s" % chapter_data.get("title", "?"))
-	print("Press C for chapter select | M for mute")
+	print("Controls: WASD move | SPACE attack | LEFT SHIFT dodge | ESC pause | C chapter select | M mute")
 
 func _dialogue_start():
 	var dlg = get_node("DialogueManager")
@@ -199,18 +202,22 @@ func _finish_chapter_complete():
 	if not allies.is_empty():
 		player.heal(25)
 	
-	print("Chapter complete! Loading next...")
+	print("Chapter complete! Transitioning...")
 	AudioManager.play_sfx("level_complete")
 	GameState.complete_current_chapter()
 	
-	# Check if there's a next chapter
+	# Fade to black, then reload
+	await ScreenFader.fade_to_black(0.5)
+	
 	var next = chapter_data.get("next_chapter", "")
 	if not next.is_empty():
 		ChapterDatabase.set_current_chapter(next)
-		$Objective.text = "CHAPTER COMPLETE — Press R to continue"
+		get_tree().reload_current_scene()
+		# NOTE: fade_from_black is called in _ready of LevelManager
 	else:
-		$Objective.text = "CHAPTER COMPLETE! — Press R to restart"
-	$Objective.modulate = Color.GREEN
+		$Objective.text = "ACT 1 COMPLETE!"
+		$Objective.modulate = Color.GOLD
+		ScreenFader.fade_from_black(1.0)
 	
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:

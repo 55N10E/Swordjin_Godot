@@ -58,7 +58,8 @@ func _load_all_sfx():
 		"ui_click",
 		"bow_fire",
 		"arrow_hit",
-		"arrow_impact"
+		"arrow_impact",
+		"dodge_roll"
 	]
 	for name in files:
 		var path = SFX_DIR + name + ".wav"

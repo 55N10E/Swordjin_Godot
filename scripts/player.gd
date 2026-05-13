@@ -8,10 +8,18 @@ var attack_cooldown: float = 0.4            # from GameState weapon
 var attack_damage: int = 10                 # from GameState weapon
 var max_health := 100
 
+# Dodge roll parameters
+const DODGE_DURATION := 0.25
+const DODGE_COOLDOWN := 1.2
+const DODGE_SPEED_MULT := 3.0
+
 var health: int
 var is_attacking := false
+var is_dodging := false
 var attack_timer := 0.0
 var cooldown_timer := 0.0
+var dodge_timer := 0.0
+var dodge_cooldown_timer := 0.0
 var is_dead := false
 
 @onready var sprite = $Polygon2D
@@ -40,7 +48,7 @@ func _physics_process(delta):
 	if is_dead:
 		return
 	
-	# Cooldown and attack timers
+	# Timers
 	if attack_timer > 0:
 		attack_timer -= delta
 		if attack_timer <= 0:
@@ -49,6 +57,19 @@ func _physics_process(delta):
 	if cooldown_timer > 0:
 		cooldown_timer -= delta
 	
+	if dodge_timer > 0:
+		dodge_timer -= delta
+		if dodge_timer <= 0:
+			_end_dodge()
+	
+	if dodge_cooldown_timer > 0:
+		dodge_cooldown_timer -= delta
+	
+	if is_dodging:
+		# Only friction slows dodge; no new input
+		move_and_slide()
+		return
+	
 	# Input
 	var input = Vector2.ZERO
 	input.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -56,18 +77,22 @@ func _physics_process(delta):
 	
 	if input.length() > 0:
 		input = input.normalized()
-		
-		# Face direction  
+		# Face direction
 		if input.x > 0:
 			sprite.scale.x = 1
 		elif input.x < 0:
 			sprite.scale.x = -1
 	
+	# Dodge input
+	if Input.is_action_just_pressed("skill1") and dodge_cooldown_timer <= 0 and not is_attacking:
+		_start_dodge()
+		return
+	
 	# Attack input
 	if Input.is_action_just_pressed("attack") and cooldown_timer <= 0 and not is_attacking:
 		_start_attack()
 	
-	# Movement (only when not attacking, or allow movement during attack)
+	# Movement
 	if not is_attacking:
 		velocity = input * speed
 	else:
@@ -76,8 +101,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 func take_damage(amount: int):
-	if is_dead:
-		return
+	if is_dead or is_dodging:
+		return  # I-frames during dodge
 	
 	health -= amount
 	_update_label()
@@ -161,6 +186,7 @@ func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
 		get_tree().reload_current_scene()
 
+# --- ATTACK ---
 func _start_attack():
 	is_attacking = true
 	attack_timer = attack_duration
@@ -169,18 +195,38 @@ func _start_attack():
 	
 	AudioManager.play_random_pitch("sword_swing", 0.95, 1.05)
 	
-# Face direction for lunge
+	# Face direction for lunge
 	var facing_right = sprite.scale.x >= 0
 	var facing = Vector2.RIGHT if facing_right else Vector2.LEFT
 	velocity = facing * speed * 2.0
 	
-	# TODO: play swing animation, spawn VFX, sound
 	print("SWING!")
 
 func _end_attack():
 	is_attacking = false
 	attack_hitbox.disabled = true
 	velocity = Vector2.ZERO
+
+# --- DODGE ROLL ---
+func _start_dodge():
+	is_dodging = true
+	dodge_timer = DODGE_DURATION
+	dodge_cooldown_timer = DODGE_COOLDOWN
+	attack_hitbox.set_deferred("disabled", true)
+	
+	# Dash in facing direction (or current movement direction)
+	var facing_dir = Vector2.RIGHT if sprite.scale.x >= 0 else Vector2.LEFT
+	velocity = facing_dir * speed * DODGE_SPEED_MULT
+	
+	# Visual: ghost / squish effect
+	modulate = Color(1, 1, 1, 0.5)
+	AudioManager.play_sfx("dodge_roll")
+	print("DODGE!")
+
+func _end_dodge():
+	is_dodging = false
+	velocity = velocity * 0.3  # quick deceleration
+	modulate = Color.WHITE
 
 func _on_attack_hitbox_body_entered(body):
 	if body.has_method("take_damage"):

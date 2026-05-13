@@ -22,13 +22,13 @@ Genre: Wuxia-themed hack-and-slash with chapter-based progression.
 - **Animations**: No `AnimatedSprite2D` anywhere. Attack = hitbox enable/disable. Death = color change + reload scene. No attack swing anims, no walk cycles, no idle anims.
 - **Sound assets**: `.wav` files are referenced but are editor folding cache entries — no actual audio files in `assets/`.
 - **Weapon system**: `broken_sword` and `steel_dagger` referenced in chapter rewards but `GameState` has no weapon switching logic. No weapon stat differences.
-- **Skill system**: Mobile controls have a `skill1_btn` that's connected but does nothing — no skills implemented.
+- **Skill system**: Mobile controls have a `skill1_btn` wired to dodge roll (_start_dodge). Charged heavy attack not yet implemented.
 - **Level design**: No tilemaps, no collision shapes for walls, no terrain. Combat arenas are empty voids.
 - **PWA export**: `export_presets.cfg` exists but no verified HTML5 export pipeline.
 - **Chapters 4+**: Only 3 chapters exist. `act01_ch004` is referenced but has no JSON or content.
 - **Dummy enemy** (`dummy.gd`): Test target, not a real enemy type.
 - **Save system** ✅ **v0.58**: `user://swordjin_save.json` persists chapter progress, HP, max HP, XP, gold, weapons, skills. Auto-save on chapter complete. Continue button loads last save.
-- **UI**: Title screen and chapter select exist but are bare-bones. No pause menu, no settings, no inventory screen.
+- **UI**: Title screen, chapter select, pause menu, and fade transitions exist. No settings or inventory screen.
 
 ## Scope to Finished Product
 
