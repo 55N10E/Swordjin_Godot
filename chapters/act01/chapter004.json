@@ -1,0 +1,75 @@
+{
+  "chapter_id": "act01_ch004",
+  "title": "The Gate Opens",
+  "act": 1,
+  "chapter": 4,
+  "type": "combat",
+  "playtime_estimate_minutes": 4,
+  "objective": "Defeat the gate defenders and open the path",
+  "background_color": [0.14, 0.06, 0.04],
+  "enemies": [
+    {
+      "type": "skeleton",
+      "count": 4,
+      "positions": [
+        {"x": 260, "y": 80},
+        {"x": 540, "y": 260},
+        {"x": 380, "y": 320},
+        {"x": 600, "y": 100}
+      ],
+      "stats": {
+        "health": 45,
+        "speed": 85,
+        "damage": 11
+      }
+    },
+    {
+      "type": "skeleton_captain",
+      "count": 1,
+      "positions": [
+        {"x": 580, "y": 140}
+      ],
+      "stats": {
+        "health": 140,
+        "speed": 68,
+        "damage": 24,
+        "shield_max": 6
+      }
+    },
+    {
+      "type": "skeleton_archer",
+      "count": 1,
+      "positions": [
+        {"x": 500, "y": 60}
+      ],
+      "stats": {
+        "health": 35,
+        "speed": 70,
+        "damage": 14
+      }
+    }
+  ],
+  "dialogue": [
+    {
+      "speaker": "JIN",
+      "text": "The gate. Beyond it lies the road north — and answers.",
+      "trigger": "start"
+    },
+    {
+      "speaker": "JIN",
+      "text": "They're guarding it in force. Of course they are.",
+      "trigger": "start"
+    },
+    {
+      "speaker": "JIN",
+      "text": "The gate is open. Act One is done... but this road leads somewhere darker.",
+      "trigger": "objective_complete"
+    }
+  ],
+  "rewards": {
+    "xp": 150,
+    "unlock_weapon": "captain_blade"
+  },
+  "next_chapter": "",
+  "is_unlocked": false
+}
