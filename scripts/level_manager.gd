@@ -10,6 +10,7 @@ extends Node2D
 var chapter_data: Dictionary = {}
 var enemies_remaining := 0
 var dialogue_triggered := {}
+var pause_menu: Control
 
 func _ready():
 	# Load chapter 001 by default
@@ -22,6 +23,10 @@ func _ready():
 	
 	# Setup scene
 	_setup_level()
+	
+	# Add pause menu
+	pause_menu = load("res://scripts/pause_menu.gd").new()
+	pause_menu.setup(self)
 	
 	# Add mobile controls
 	var mobile_scene = load("res://scenes/mobile_controls.tscn")
@@ -209,8 +214,16 @@ func _finish_chapter_complete():
 	
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
+		if pause_menu and pause_menu.is_paused:
+			pause_menu._resume()
 		get_tree().reload_current_scene()
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		if pause_menu:
+			pause_menu.toggle()
+			get_viewport().set_input_as_handled()
 	if event is InputEventKey and event.pressed and event.keycode == KEY_C:
+		if pause_menu and pause_menu.is_paused:
+			return
 		var chm = get_node_or_null("ChapterManager")
 		if chm:
 			chm.visible = not chm.visible
@@ -220,3 +233,5 @@ func _input(event):
 				chm.hide_manager()
 	if event is InputEventKey and event.pressed and event.keycode == KEY_M:
 		AudioManager.set_volume(0.0 if AudioManager.master_volume > 0.0 else 0.8)
+		if pause_menu:
+			pause_menu._update_mute_label()

@@ -163,3 +163,35 @@ LAST_RUN=20260513_0953
 ### Commit: TBD
 
 LAST_RUN=20260513_1051
+
+
+---
+
+# v0.62 — Pause Menu
+
+### New Files
+- `scripts/pause_menu.gd` — Runtime pause overlay
+  - Full-screen overlay with semi-transparent backdrop
+  - Resume, Restart Chapter, Mute/Unmute, Quit to Title buttons
+  - Blocks input behind it (mouse_filter = STOP)
+  - ESC key toggles pause; R restarts (pauses first), C toggles chapter manager
+  - `Engine.time_scale = 0` when paused, z_index=100
+  - Works in both native and HTML5 builds
+
+### Updated
+- `scripts/level_manager.gd` — instantiates pause_menu via script.new(), calls setup()
+  - _input() checks pause_menu state before scene reload / chapter manager toggle
+- `project.godot` — added `pause` input action (ESC key, keycode 4194305)
+- `scenes/main.tscn` — instructions label updated: added ESC=Pause text
+- `scenes/title_screen.tscn` — version bumped to v0.62
+
+### Design Rationale
+- Runtime UI = no .tscn fragility, works the same across scenes
+- Pause stops combat, dialogue, and all timers
+- Mute button syncs with AudioManager state
+- Quit to Title clears GameState chapter data and returns to title screen
+
+### Zero Parse Errors ✅
+### Commit: TBD
+
+LAST_RUN=20260513_1216
