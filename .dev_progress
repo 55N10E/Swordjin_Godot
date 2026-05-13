@@ -15,6 +15,10 @@
   - `scripts/merchant_ally.gd` — follows player (80px distance), heals 10HP/5s, floating dialogue, invulnerable
   - `scripts/level_manager.gd` — preloads merchant_scene, spawns allies from chapter data, reads dialogue dict
 - [x] SecDev PLUGIN-01 — Dynamic plugin loading verified: 2 plugins load, hooks register, dispatch works
+- [x] SecDev PWA-01 — nginx reverse proxy :80 → :8765 with WebSocket upgrade headers
+- [x] Swordjin BGM theme01_ambience (30s procedural loop) + gen_bgm.py script
+- [x] Full web export — clean build, zero errors, PWA manifest + sw.js patched
+- [x] GitHub Pages deploy — https://55n10e.github.io/Swordjin_Godot/
 
 ### Previous (v0.28-v0.50)
 - [x] Ch1-3 gameplay balance pass — damage up across the board
