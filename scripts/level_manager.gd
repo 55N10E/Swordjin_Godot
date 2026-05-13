@@ -7,11 +7,13 @@ extends Node2D
 @onready var archer_scene = preload("res://scenes/skeleton_archer.tscn")
 @onready var merchant_scene = preload("res://scenes/merchant_ally.tscn")
 @onready var gate_scene = preload("res://scenes/iron_gate.tscn")
+@onready var victory_screen_scene = preload("res://scenes/ui/victory_screen.tscn")
 
 var chapter_data: Dictionary = {}
 var enemies_remaining := 0
 var dialogue_triggered := {}
 var pause_menu: Control
+var victory_screen: CanvasLayer
 
 func _ready():
 	# Load chapter 001 by default
@@ -225,21 +227,44 @@ func _finish_chapter_complete():
 	
 	print("Chapter complete! Transitioning...")
 	AudioManager.play_sfx("level_complete")
+	
+	# Capture rewards BEFORE completing (GameState clears them after)
+	var rewards = ChapterDatabase.get_current_chapter().get("rewards", {})
+	var xp_gained: int = rewards.get("xp", 0)
+	var reward_weapon: String = rewards.get("unlock_weapon", "")
+	var reward_skill: String = rewards.get("unlock_skill", "")
+	
 	GameState.complete_current_chapter()
 	
-	# Fade to black, then reload
-	await ScreenFader.fade_to_black(0.5)
+	# Show victory screen instead of instant reload
+	victory_screen = victory_screen_scene.instantiate()
+	add_child(victory_screen)
 	
+	var has_next = not chapter_data.get("next_chapter", "").is_empty()
+	victory_screen._has_next_chapter = has_next
+	
+	victory_screen.show_victory(
+		chapter_data.get("title", "Chapter Complete"),
+		xp_gained,
+		reward_weapon,
+		reward_skill
+	)
+	
+	victory_screen.next_chapter_pressed.connect(_on_victory_next)
+	victory_screen.chapter_select_pressed.connect(_on_victory_select)
+
+func _on_victory_next():
 	var next = chapter_data.get("next_chapter", "")
 	if not next.is_empty():
 		ChapterDatabase.set_current_chapter(next)
+		ScreenFader.fade_to_black(0.5)
+		await get_tree().create_timer(0.5).timeout
 		get_tree().reload_current_scene()
-		# NOTE: fade_from_black is called in _ready of LevelManager
-	else:
-		$Objective.text = "ACT 1 COMPLETE!"
-		$Objective.modulate = Color.GOLD
-		ScreenFader.fade_from_black(1.0)
-	
+
+func _on_victory_select():
+	victory_screen.hide_victory()
+	# Player can press C to open chapter manager, or continue playing
+
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
 		if pause_menu and pause_menu.is_paused:

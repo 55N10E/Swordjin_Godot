@@ -43,14 +43,14 @@ Genre: Wuxia-themed hack-and-slash with chapter-based progression.
 
 ### Should-Have (Polished Demo)
 7. **Attack animations**: 4-frame swing anim for player. 2-frame attack for skeletons. Captain has shield-block anim.
-8. **Pause menu**: Pause (Esc), resume, restart chapter, quit to title.
-9. **HP potions**: Dropped by skeletons at 20% chance. Auto-pickup, heals 15 HP.
-10. **Chapter transitions**: Fade-to-black between chapters. Victory screen showing XP gained.
+8. **Pause menu** ✅ v0.62
+9. **HP potions** ✅ v0.61
+10. **Chapter transitions** ✅ v0.65: Fade-to-black between chapters. Victory screen showing XP gained.
 
 ### Nice-to-Have (Full Release)
 11. **Act 2**: 4 more chapters with new enemy types (ghost, assassin, boss).
-12. **PWA HTML5 export**: Touch controls, responsive canvas, offline caching via service worker.
-13. **Skill system**: Dodge roll (skill1 button), charged heavy attack (hold attack).
+12. **PWA HTML5 export** ✅ v0.26: Touch controls, responsive canvas, offline caching via service worker.
+13. **Skill system** ✅ v0.63: Dodge roll (skill1 button), charged heavy attack (hold attack).
 14. **Procedural audio**: Use Godot AudioStreamGenerator for sfx if wav assets unavailable.
 
 ## Architecture Constraints
