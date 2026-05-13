@@ -191,7 +191,49 @@ LAST_RUN=20260513_1051
 - Mute button syncs with AudioManager state
 - Quit to Title clears GameState chapter data and returns to title screen
 
-### Zero Parse Errors ✅
-### Commit: TBD
+---
 
-LAST_RUN=20260513_1216
+# v0.63 — Dodge Roll + Screen Fade Transitions
+
+### New Files
+- `scripts/screen_fader.gd` — Autoload CanvasLayer with ColorRect overlay
+  - `fade_to_black(duration)` returns Signal → tween to Color.BLACK
+  - `fade_from_black(duration)` returns Signal → tween to Color.TRANSPARENT
+  - `flash_white(duration)` returns Signal → brief white flash
+- `scenes/screen_fader.tscn` — CanvasLayer (layer=99) + full-screen ColorRect (mouse_filter=PASS)
+
+### Updated
+- `project.godot`
+  - Added `skill1` input action (LEFT SHIFT, keycode 4194325)
+  - Added `ScreenFader` to `[autoload]`
+- `scripts/player.gd`
+  - Dodge roll: `is_dodging` state, I-frames during roll (no damage)
+  - Constants: `DODGE_DURATION=0.25s`, `DODGE_COOLDOWN=1.2s`, `DODGE_SPEED_MULT=3.0`
+  - Dash in facing direction at 3× speed during roll
+  - Visual: modulate opacity to 50%, flash back to white on end
+  - Attack hitbox disabled during dodge; no attacking while dodging
+  - `skill1` input wired → `_start_dodge()`; mobile `skill1_btn` now functional
+- `scripts/level_manager.gd`
+  - `_finish_chapter_complete()` now fades to black, increments chapter, reloads scene
+  - `_ready()` fades from black on level load
+  - Updated control hint: added LEFT SHIFT = dodge
+- `scripts/autoload/audio_manager.gd`
+  - Added `dodge_roll` to SFX preload list (placeholder, no asset yet)
+
+### Design Rationale
+- Dodge roll: gives player a defensive option without adding shield/block complexity
+  - I-frames prevent "tank everything" — requires timing, not mashing
+  - Short duration (0.25s) + long cooldown (1.2s) = high risk/reward
+  - Visual opacity communicates invulnerability window
+- Fade transitions: polish for chapter flow
+  - Eliminates jarring instant reload on chapter complete
+  - Consistent with pause menu overlay pattern (CanvasLayer autoload)
+  - Can be reused for death respawn, cutscene transitions
+
+### Version Changes
+- PROMPT_PACK.md updated: skill system marked functional, UI note updated
+
+### Zero Parse Errors ✅ (manual review + GDScript syntax)
+### Commit: `67a8111`
+
+LAST_RUN=20260513_1232
