@@ -8,12 +8,17 @@
   "orientation": "landscape",
   "icons": [
     {
-      "src": "icon_144.png",
+      "src": "index.144x144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "icon_512.png",
+      "src": "index.180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "index.512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
