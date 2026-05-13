@@ -27,7 +27,7 @@ Genre: Wuxia-themed hack-and-slash with chapter-based progression.
 - **PWA export**: `export_presets.cfg` exists but no verified HTML5 export pipeline.
 - **Chapters 4+**: Only 3 chapters exist. `act01_ch004` is referenced but has no JSON or content.
 - **Dummy enemy** (`dummy.gd`): Test target, not a real enemy type.
-- **Save system**: No persistence. Death → reload scene. No checkpoint or save file.
+- **Save system** ✅ **v0.58**: `user://swordjin_save.json` persists chapter progress, HP, max HP, XP, gold, weapons, skills. Auto-save on chapter complete. Continue button loads last save.
 - **UI**: Title screen and chapter select exist but are bare-bones. No pause menu, no settings, no inventory screen.
 
 ## Scope to Finished Product
