@@ -32,6 +32,7 @@ GameState="*res://scripts/autoload/game_state.gd"
 ChapterDatabase="*res://scripts/autoload/chapter_database.gd"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
 ScreenShake="*res://scripts/screen_shake.gd"
+HitStop="*res://scripts/hit_stop.gd"
 
 [rendering]
 renderer/rendering_method="gl_compatibility"

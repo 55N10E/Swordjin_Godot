@@ -76,8 +76,10 @@ func take_damage(amount: int):
 	# Screen shake on heavy hits
 	if amount >= 8:
 		ScreenShake.shake(3.0, 0.3)
+		HitStop.trigger_heavy()
 	elif amount >= 5:
 		ScreenShake.shake(1.5, 0.2)
+		HitStop.trigger_light()
 	
 	AudioManager.play_sfx("player_hurt")
 	
@@ -166,6 +168,7 @@ func _on_attack_hitbox_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(10)
 		AudioManager.play_random_pitch("sword_hit", 0.9, 1.1)
+		HitStop.trigger_light()
 		print("Hit: ", body.name)
 
 func get_current_health() -> int:

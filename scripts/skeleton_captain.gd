@@ -192,6 +192,7 @@ func _die():
 func _on_attack_hitbox_body_entered(body):
 	if body.has_method("take_damage") and body != self:
 		body.take_damage(attack_damage)
+		HitStop.trigger_heavy()
 		print("Captain hit: ", body.name)
 
 func _on_detection_area_body_entered(body):
