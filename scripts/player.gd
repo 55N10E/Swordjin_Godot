@@ -3,9 +3,10 @@ extends CharacterBody2D
 var damage_number_scene = preload("res://scenes/ui/damage_number.tscn")
 
 @export var speed := 200.0
-@export var attack_duration := 0.3
-@export var attack_cooldown := 0.4
-@export var max_health := 100
+@export var attack_duration := 0.3          # swing anim time, fixed
+var attack_cooldown: float = 0.4            # from GameState weapon
+var attack_damage: int = 10                 # from GameState weapon
+var max_health := 100
 
 var health: int
 var is_attacking := false
@@ -20,11 +21,20 @@ var is_dead := false
 
 func _ready():
 	add_to_group("player")
+	_apply_weapon()
 	health = max_health
 	attack_hitbox.set_deferred("disabled", true)
 	_update_label()
 	if health_bar:
 		health_bar.update_health(health, max_health)
+
+func _apply_weapon():
+	var weapon := GameState.get_weapon_stats()
+	attack_damage = weapon.get("damage", 10)
+	attack_cooldown = weapon.get("cooldown", 0.4)
+	max_health = GameState.saved_max_health
+	health = GameState.saved_health
+	print("Player weapon: %s — DMG %d, Cooldown %.2fs, HP %d/%d" % [GameState.equipped_weapon, attack_damage, attack_cooldown, health, max_health])
 
 func _physics_process(delta):
 	if is_dead:
@@ -169,10 +179,10 @@ func _end_attack():
 
 func _on_attack_hitbox_body_entered(body):
 	if body.has_method("take_damage"):
-		body.take_damage(10)
+		body.take_damage(attack_damage)
 		AudioManager.play_random_pitch("sword_hit", 0.9, 1.1)
 		HitStop.trigger_light()
-		print("Hit: ", body.name)
+		print("Hit: %s for %d DMG with %s" % [body.name, attack_damage, GameState.equipped_weapon])
 
 func get_current_health() -> int:
 	return health

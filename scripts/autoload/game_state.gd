@@ -1,8 +1,15 @@
 extends Node
 # GameState — Persistent save/load + progression tracking
-# v0.58 — health persistence across chapters, auto-save on chapter complete
+# v0.60 — weapon stat differentiation, equipped weapon tracking
 
 const SAVE_FILE := "user://swordjin_save.json"
+
+# Weapon definitions — unlocked weapons auto-equip if better
+const WEAPON_STATS := {
+	"broken_sword":    {"damage": 8,  "cooldown": 0.40, "description": "A rusted relic. Barely sharp."},
+	"steel_dagger":    {"damage": 12, "cooldown": 0.30, "description": "Merchant's gift. Light and lethal."},
+	"captains_blade":  {"damage": 15, "cooldown": 0.50, "description": "A commander's weapon. Heavy but ruthless."},
+}
 
 # Player Progress
 var current_act: int = 1
@@ -13,6 +20,7 @@ var player_xp: int = 0
 var player_gold: int = 0
 var unlocked_weapons: Array = []
 var unlocked_skills: Array = []
+var equipped_weapon: String = "broken_sword"  # default starting weapon
 
 # Chapter State (runtime only)
 var chapter_kills: int = 0
@@ -38,6 +46,7 @@ func save_game():
 		"player_gold": player_gold,
 		"unlocked_weapons": unlocked_weapons,
 		"unlocked_skills": unlocked_skills,
+		"equipped_weapon": equipped_weapon,
 		"saved_health": saved_health,
 		"saved_max_health": saved_max_health
 	}
@@ -79,9 +88,12 @@ func load_game():
 		player_gold = data.get("player_gold", 0)
 		unlocked_weapons = data.get("unlocked_weapons", [])
 		unlocked_skills = data.get("unlocked_skills", [])
+		equipped_weapon = data.get("equipped_weapon", "broken_sword")
+		if equipped_weapon not in unlocked_weapons:
+			equipped_weapon = "broken_sword"
 		saved_health = data.get("saved_health", 100)
 		saved_max_health = data.get("saved_max_health", 100)
-		print("Save loaded — HP %d/%d" % [saved_health, saved_max_health])
+		print("Save loaded — HP %d/%d, weapon: %s" % [saved_health, saved_max_health, equipped_weapon])
 
 func complete_current_chapter():
 	var chapter_id := "act%02d_ch%03d" % [current_act, current_chapter]
@@ -99,6 +111,7 @@ func complete_current_chapter():
 	player_xp += rewards.get("xp", 0)
 	if rewards.has("unlock_weapon"):
 		unlocked_weapons.append(rewards.unlock_weapon)
+		_auto_equip_best_weapon()
 	if rewards.has("unlock_skill"):
 		unlocked_skills.append(rewards.unlock_skill)
 	
@@ -143,6 +156,24 @@ func _save_indexeddb():
 			}
 		""")
 		print("IndexedDB sync requested")
+
+func _auto_equip_best_weapon():
+	var best_weapon := "broken_sword"
+	var best_dmg: int = 0
+	for weapon_id in unlocked_weapons:
+		if weapon_id in WEAPON_STATS:
+			var dmg: int = WEAPON_STATS[weapon_id].get("damage", 0)
+			if dmg > best_dmg:
+				best_dmg = dmg
+				best_weapon = weapon_id
+	if best_weapon != equipped_weapon:
+		equipped_weapon = best_weapon
+		print("Auto-equipped: %s (DMG %d, CD %.2fs)" % [equipped_weapon, WEAPON_STATS[equipped_weapon].damage, WEAPON_STATS[equipped_weapon].cooldown])
+
+func get_weapon_stats(weapon_id: String = equipped_weapon) -> Dictionary:
+	if weapon_id in WEAPON_STATS:
+		return WEAPON_STATS[weapon_id]
+	return WEAPON_STATS["broken_sword"]
 
 class ChapterProgress:
 	var chapter_id: String
