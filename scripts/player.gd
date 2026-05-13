@@ -14,12 +14,15 @@ var is_dead := false
 @onready var sprite = $Polygon2D
 @onready var attack_hitbox = $AttackHitbox/CollisionShape2D
 @onready var label = $Label
+@onready var health_bar = $HealthBar
 
 func _ready():
 	add_to_group("player")
 	health = max_health
 	attack_hitbox.set_deferred("disabled", true)
 	_update_label()
+	if health_bar:
+		health_bar.update_health(health, max_health)
 
 func _physics_process(delta):
 	if is_dead:
@@ -52,7 +55,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and cooldown_timer <= 0 and not is_attacking:
 		_start_attack()
 	
-	# Movement (only when not attacking, or allow movement during attack — your call)
+	# Movement (only when not attacking, or allow movement during attack)
 	if not is_attacking:
 		velocity = input * speed
 	else:
@@ -81,6 +84,8 @@ func take_damage(amount: int):
 func _update_label():
 	if label:
 		label.text = "Player HP: %d/%d" % [health, max_health]
+	if health_bar:
+		health_bar.update_health(health, max_health)
 
 func merchant_heal(amount: int):
 	if is_dead:
@@ -143,3 +148,6 @@ func _on_attack_hitbox_body_entered(body):
 		body.take_damage(10)
 		AudioManager.play_random_pitch("sword_hit", 0.9, 1.1)
 		print("Hit: ", body.name)
+
+func get_current_health() -> int:
+	return health

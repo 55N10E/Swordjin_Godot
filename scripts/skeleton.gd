@@ -19,6 +19,7 @@ var is_dead := false
 @onready var attack_hitbox = $AttackHitbox/CollisionShape2D
 @onready var detection_area = $DetectionArea
 @onready var label = $Label
+@onready var health_bar = $HealthBar
 
 func _ready():
 	health = max_health
@@ -107,6 +108,8 @@ func take_damage(amount: int):
 func _update_label():
 	if label:
 		label.text = "HP: %d/%d" % [health, max_health]
+	if health_bar:
+		health_bar.update_health(health, max_health)
 
 func _die():
 	is_dead = true

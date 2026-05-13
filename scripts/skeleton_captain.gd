@@ -30,6 +30,7 @@ var charge_timer := 0.0
 @onready var attack_hitbox = $AttackHitbox/CollisionShape2D
 @onready var detection_area = $DetectionArea
 @onready var label = $Label
+@onready var health_bar = $HealthBar
 
 func _ready():
 	health = max_health
@@ -158,6 +159,8 @@ func _update_shield_visual():
 func _update_label():
 	if label:
 		label.text = "CAPTAIN\nHP: %d/%d\n🛡%d" % [health, max_health, shield_charges]
+	if health_bar:
+		health_bar.update_health(health, max_health)
 
 func _die():
 	is_dead = true

@@ -25,6 +25,7 @@ var is_winding_up := false
 @onready var detection_area = $DetectionArea
 @onready var label = $Label
 @onready var fire_point = $FirePoint
+@onready var health_bar = $HealthBar
 
 func _ready():
 	health = max_health
@@ -136,6 +137,8 @@ func take_damage(amount: int):
 func _update_label():
 	if label:
 		label.text = "HP: %d/%d\n🏹" % [health, max_health]
+	if health_bar:
+		health_bar.update_health(health, max_health)
 
 func _die():
 	is_dead = true

@@ -5,28 +5,31 @@
 - Target: Mobile PWA via HTML5 export
 - Resolution: 640x360 (scales to mobile)
 
-# v0.52 WIP — Skeleton Archer Added
+# v0.53 — Floating Health Bars
 
 ### New Files
-- `scripts/skeleton_archer.gd` + `scenes/skeleton_archer.tscn` — Ranged enemy
-  - Keeps optimal distance (~170px), retreats if player too close
-  - Yellow telegraph before firing, windup timer in _physics_process (no race)
-  - Arrow projectile scene + script: flies straight, hits player or walls
-  - Weak melee bash (60% arrow damage) if player enters melee hitbox
-  - HP 25, speed 70, arrow damage 7, fire cooldown 2s
-- `scripts/arrow.gd` + `scenes/projectiles/arrow.tscn` — Projectile
-  - Direction + speed + damage parameters, 3s lifetime, auto-cleanup
-  - Hits player → deals damage, hits wall → plays impact SFX
-- `scripts/generate_arrow_sfx.py` — Bow fire + arrow hit + impact WAVs
-- 3x new SFX added to AudioManager: `bow_fire`, `arrow_hit`, `arrow_impact`
+- `scenes/ui/health_bar.tscn` + `scripts/health_bar.gd` — Reusable health bar UI
+  - Small bar (32×6px) that sits above characters
+  - Green → yellow → red color shift as HP drops
+  - Smooth width scaling based on current/max HP
 
-### Modified
-- `level_manager.gd` — spawns archers from chapter JSON (type: "skeleton_archer")
-- `audio_manager.gd` — loads +3 new SFX (total 11)
-- `chapter002.json` — 2 melee skeletons + 1 archer (replacing 3 melee)
+### Updated
+- `scenes/player.tscn` — added HealthBar instance
+- `scenes/skeleton.tscn` — added HealthBar instance
+- `scenes/skeleton_captain.tscn` — added HealthBar instance
+- `scenes/skeleton_archer.tscn` — added HealthBar instance
+- `scripts/player.gd` — calls `health_bar.update_health()` in `_ready()` and `_update_label()`
+- `scripts/skeleton.gd` — calls `health_bar.update_health()` in `_update_label()`
+- `scripts/skeleton_captain.gd` — calls `health_bar.update_health()` in `_update_label()`
+- `scripts/skeleton_archer.gd` — calls `health_bar.update_health()` in `_update_label()`
+
+### Visual Polish
+- Health bars appear above all combatants (player + 3 enemy types)
+- Color-coded: green (>60%), yellow (30-60%), red (<30%)
+- Enemy labels still show text HP + shield count (captain)
 
 ### Zero Parse Errors ✅
 ### Commit: TBD
 
 
-LAST_RUN=20260513_0326
+LAST_RUN=20260513_0410
