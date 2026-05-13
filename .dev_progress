@@ -140,3 +140,26 @@ LAST_RUN=20260513_0446
 ### Commit: `b99b903`
 
 LAST_RUN=20260513_0953
+
+
+---
+
+# v0.58 — Health Persistence Across Chapters
+
+### Changes
+- GameState: added `saved_health` + `saved_max_health` fields (version bumped to 1.1)
+- `_setup_level()`: applies saved health to player at chapter start
+- `_update_label()`: auto-saves HP so Continue works correctly
+- Between-chapter heal: +25 HP on chapter complete
+- Title screen version: updated to v0.57 (released)
+
+### Design Rationale
+- Save system already existed; this makes it *work* for the gameplay loop
+- Continue button now restores player to actual saved HP, not full heal
+- Inter-chapter heal keeps tension without punishing too hard
+- Backwards compatible: old save files without saved_health default to 100
+
+### Zero Parse Errors ✅
+### Commit: TBD
+
+LAST_RUN=20260513_1051

@@ -1,6 +1,6 @@
 extends Node
 # GameState — Persistent save/load + progression tracking
-# Handles chapter unlocks, player stats, settings
+# v0.58 — health persistence across chapters, auto-save on chapter complete
 
 const SAVE_FILE := "user://swordjin_save.json"
 
@@ -19,13 +19,17 @@ var chapter_kills: int = 0
 var chapter_objectives_met: Dictionary = {}
 var is_paused: bool = false
 
+# v0.58 — health persistence (so "Continue" restores HP too)
+var saved_health: int = 100
+var saved_max_health: int = 100
+
 func _ready():
 	load_game()
-	print("GameState loaded — Act %d, Chapter %d" % [current_act, current_chapter])
+	print("GameState loaded — Act %d, Chapter %d, Level %d" % [current_act, current_chapter, player_level])
 
 func save_game():
 	var data := {
-		"version": "1.0",
+		"version": "1.1",
 		"current_act": current_act,
 		"current_chapter": current_chapter,
 		"completed_chapters": completed_chapters,
@@ -33,7 +37,9 @@ func save_game():
 		"player_xp": player_xp,
 		"player_gold": player_gold,
 		"unlocked_weapons": unlocked_weapons,
-		"unlocked_skills": unlocked_skills
+		"unlocked_skills": unlocked_skills,
+		"saved_health": saved_health,
+		"saved_max_health": saved_max_health
 	}
 	
 	var file := FileAccess.open(SAVE_FILE, FileAccess.WRITE)
@@ -73,7 +79,9 @@ func load_game():
 		player_gold = data.get("player_gold", 0)
 		unlocked_weapons = data.get("unlocked_weapons", [])
 		unlocked_skills = data.get("unlocked_skills", [])
-		print("Save loaded successfully")
+		saved_health = data.get("saved_health", 100)
+		saved_max_health = data.get("saved_max_health", 100)
+		print("Save loaded — HP %d/%d" % [saved_health, saved_max_health])
 
 func complete_current_chapter():
 	var chapter_id := "act%02d_ch%03d" % [current_act, current_chapter]
@@ -94,11 +102,14 @@ func complete_current_chapter():
 	if rewards.has("unlock_skill"):
 		unlocked_skills.append(rewards.unlock_skill)
 	
+	# Heal 25 HP between chapters (and cap at max)
+	saved_health = mini(saved_health + 25, saved_max_health)
+	
 	_save_indexeddb()
 	save_game()
 
 func get_level_xp_requirement(level: int) -> int:
-	# Simple quadratic XP curve
+	# Quadratic XP curve
 	return level * level * 100
 
 func add_xp(amount: int):

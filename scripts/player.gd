@@ -97,6 +97,9 @@ func _update_label():
 		label.text = "Player HP: %d/%d" % [health, max_health]
 	if health_bar:
 		health_bar.update_health(health, max_health)
+	# Auto-save HP state so "Continue" works
+	GameState.saved_health = health
+	GameState.saved_max_health = max_health
 
 func merchant_heal(amount: int):
 	if is_dead:

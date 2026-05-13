@@ -75,6 +75,12 @@ func _on_dialogue_ended_start():
 	AudioManager.play_bgm("bgm_battle", 1.0, true)
 
 func _setup_level():
+	# Apply saved health from GameState
+	if player and GameState.saved_health > 0:
+		player.max_health = GameState.saved_max_health
+		player.health = GameState.saved_health
+		player._update_label()
+	
 	# Clear existing skeletons
 	for child in get_children():
 		if child.is_in_group("enemy"):
