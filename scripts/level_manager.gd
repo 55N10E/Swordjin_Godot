@@ -231,6 +231,7 @@ func _finish_chapter_complete():
 	# Capture rewards BEFORE completing (GameState clears them after)
 	var rewards = ChapterDatabase.get_current_chapter().get("rewards", {})
 	var xp_gained: int = rewards.get("xp", 0)
+	var gold_gained: int = rewards.get("gold", 0)
 	var reward_weapon: String = rewards.get("unlock_weapon", "")
 	var reward_skill: String = rewards.get("unlock_skill", "")
 	
@@ -246,6 +247,7 @@ func _finish_chapter_complete():
 	victory_screen.show_victory(
 		chapter_data.get("title", "Chapter Complete"),
 		xp_gained,
+		gold_gained,
 		reward_weapon,
 		reward_skill
 	)

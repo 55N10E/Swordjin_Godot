@@ -1,6 +1,6 @@
 extends CanvasLayer
 # VictoryScreen — Chapter complete overlay
-# v0.65: Shows XP gain + weapon unlock with Continue / Chapter Select buttons
+# v0.66: Shows XP gain + gold earned + weapon unlock with Continue / Chapter Select buttons
 
 signal next_chapter_pressed
 signal chapter_select_pressed
@@ -8,6 +8,7 @@ signal chapter_select_pressed
 @onready var panel = $Panel
 @onready var title_label = $Panel/VBoxContainer/TitleLabel
 @onready var xp_label = $Panel/VBoxContainer/XPLabel
+@onready var gold_label = $Panel/VBoxContainer/GoldLabel
 @onready var reward_label = $Panel/VBoxContainer/RewardLabel
 @onready var continue_btn = $Panel/VBoxContainer/HBoxContainer/ContinueButton
 @onready var select_btn = $Panel/VBoxContainer/HBoxContainer/SelectButton
@@ -21,7 +22,7 @@ func _ready():
 	continue_btn.pressed.connect(_on_continue)
 	select_btn.pressed.connect(_on_select)
 
-func show_victory(chapter_title: String, xp_gained: int, reward_weapon: String = "", reward_skill: String = ""):
+func show_victory(chapter_title: String, xp_gained: int, gold_gained: int = 0, reward_weapon: String = "", reward_skill: String = ""):
 	# Pause the game
 	get_tree().paused = true
 	
@@ -30,6 +31,11 @@ func show_victory(chapter_title: String, xp_gained: int, reward_weapon: String =
 	
 	# XP line
 	xp_label.text = "XP Gained: " + str(xp_gained)
+	
+	# Gold line (yellow #FFD700)
+	gold_label.text = "Gold Earned: " + str(gold_gained)
+	gold_label.add_theme_color_override("font_color", Color(1.0, 0.843, 0.0))  # #FFD700
+	gold_label.visible = true
 	
 	# Reward line
 	var reward_parts: Array[String] = []

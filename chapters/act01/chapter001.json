@@ -6,16 +6,32 @@
   "type": "combat",
   "playtime_estimate_minutes": 3,
   "objective": "Defeat 4 skeletons",
-  "background_color": [0.08, 0.1, 0.12],
+  "background_color": [
+    0.08,
+    0.1,
+    0.12
+  ],
   "enemies": [
     {
       "type": "skeleton",
       "count": 4,
       "positions": [
-        {"x": 280, "y": 120},
-        {"x": 480, "y": 250},
-        {"x": 400, "y": 80},
-        {"x": 550, "y": 160}
+        {
+          "x": 280,
+          "y": 120
+        },
+        {
+          "x": 480,
+          "y": 250
+        },
+        {
+          "x": 400,
+          "y": 80
+        },
+        {
+          "x": 550,
+          "y": 160
+        }
       ],
       "stats": {
         "health": 35,
@@ -44,7 +60,8 @@
   "rewards": {
     "xp": 50,
     "unlock_weapon": "broken_sword",
-    "unlock_chapter": "act01_ch002"
+    "unlock_chapter": "act01_ch002",
+    "gold": 10
   },
   "next_chapter": "act01_ch002",
   "is_unlocked": true

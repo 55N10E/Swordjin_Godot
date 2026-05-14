@@ -6,16 +6,32 @@
   "type": "combat",
   "playtime_estimate_minutes": 4,
   "objective": "Defeat the gate defenders and open the path",
-  "background_color": [0.14, 0.06, 0.04],
+  "background_color": [
+    0.14,
+    0.06,
+    0.04
+  ],
   "enemies": [
     {
       "type": "skeleton",
       "count": 4,
       "positions": [
-        {"x": 260, "y": 80},
-        {"x": 540, "y": 260},
-        {"x": 380, "y": 320},
-        {"x": 600, "y": 100}
+        {
+          "x": 260,
+          "y": 80
+        },
+        {
+          "x": 540,
+          "y": 260
+        },
+        {
+          "x": 380,
+          "y": 320
+        },
+        {
+          "x": 600,
+          "y": 100
+        }
       ],
       "stats": {
         "health": 45,
@@ -27,7 +43,10 @@
       "type": "skeleton_captain",
       "count": 1,
       "positions": [
-        {"x": 580, "y": 140}
+        {
+          "x": 580,
+          "y": 140
+        }
       ],
       "stats": {
         "health": 140,
@@ -40,7 +59,10 @@
       "type": "skeleton_archer",
       "count": 1,
       "positions": [
-        {"x": 500, "y": 60}
+        {
+          "x": 500,
+          "y": 60
+        }
       ],
       "stats": {
         "health": 35,
@@ -52,7 +74,7 @@
   "dialogue": [
     {
       "speaker": "JIN",
-      "text": "The gate. Beyond it lies the road north — and answers.",
+      "text": "The gate. Beyond it lies the road north \u2014 and answers.",
       "trigger": "start"
     },
     {
@@ -68,7 +90,8 @@
   ],
   "rewards": {
     "xp": 150,
-    "unlock_weapon": "captain_blade"
+    "unlock_weapon": "captain_blade",
+    "gold": 50
   },
   "next_chapter": "",
   "is_unlocked": false

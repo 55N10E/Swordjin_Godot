@@ -6,15 +6,28 @@
   "type": "combat",
   "playtime_estimate_minutes": 3,
   "objective": "Defeat the skeleton captain and his guards",
-  "background_color": [0.18, 0.08, 0.05],
+  "background_color": [
+    0.18,
+    0.08,
+    0.05
+  ],
   "enemies": [
     {
       "type": "skeleton",
       "count": 3,
       "positions": [
-        {"x": 280, "y": 100},
-        {"x": 520, "y": 220},
-        {"x": 400, "y": 300}
+        {
+          "x": 280,
+          "y": 100
+        },
+        {
+          "x": 520,
+          "y": 220
+        },
+        {
+          "x": 400,
+          "y": 300
+        }
       ],
       "stats": {
         "health": 40,
@@ -26,7 +39,10 @@
       "type": "skeleton_captain",
       "count": 1,
       "positions": [
-        {"x": 600, "y": 120}
+        {
+          "x": 600,
+          "y": 120
+        }
       ],
       "stats": {
         "health": 120,
@@ -39,7 +55,7 @@
   "dialogue": [
     {
       "speaker": "JIN",
-      "text": "That dagger cuts cleaner. But it's not the blade that kills — it's the hand.",
+      "text": "That dagger cuts cleaner. But it's not the blade that kills \u2014 it's the hand.",
       "trigger": "start"
     },
     {
@@ -50,7 +66,8 @@
   ],
   "rewards": {
     "xp": 100,
-    "unlock_chapter": "act01_ch004"
+    "unlock_chapter": "act01_ch004",
+    "gold": 20
   },
   "next_chapter": "act01_ch004",
   "is_unlocked": false
