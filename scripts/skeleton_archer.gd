@@ -23,7 +23,7 @@ var cooldown_timer := 0.0
 var windup_timer := 0.0
 var is_winding_up := false
 
-@onready var sprite = $Polygon2D
+@onready var sprite = $AnimatedSprite2D
 @onready var detection_area = $DetectionArea
 @onready var label = $Label
 @onready var fire_point = $FirePoint
@@ -34,6 +34,7 @@ var potion_scene = preload("res://scenes/potion_pickup.tscn")
 func _ready():
 	health = max_health
 	_update_label()
+	sprite.play("idle")
 	
 	await get_tree().process_frame
 	player = get_tree().get_first_node_in_group("player")
@@ -73,18 +74,23 @@ func _physics_process(delta):
 	if dist > detection_range:
 		# Too far, idle
 		velocity = Vector2.ZERO
+		sprite.play("idle")
 	elif dist < too_close_range:
 		# Too close — back away
 		velocity = -dir * speed * 1.2
+		sprite.play("walk")
 	elif dist < optimal_range - 20.0:
 		# A bit too close — gentle retreat
 		velocity = -dir * speed * 0.6
+		sprite.play("walk")
 	elif dist > optimal_range + 30.0:
 		# A bit too far — approach
 		velocity = dir * speed
+		sprite.play("walk")
 	else:
 		# In the sweet spot — try to fire
 		velocity = Vector2.ZERO
+		sprite.play("idle")
 		if cooldown_timer <= 0 and not is_winding_up:
 			_start_windup()
 	

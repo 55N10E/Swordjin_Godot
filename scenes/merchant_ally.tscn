@@ -5,6 +5,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_merchant"]
 radius = 12.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_merchant"]
+animations = [{
+"frames": [ExtResource("res://assets/art/npcs/merchant_idle.png")],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [node name="MerchantAlly" type="CharacterBody2D" groups=["ally"]]
 collision_layer = 8
 collision_mask = 15
@@ -13,9 +21,9 @@ script = ExtResource("1_merchant")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_merchant")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.3, 0.8, 0.3, 1)
-polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_merchant")
+animation = &"idle"
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 5

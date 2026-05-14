@@ -19,8 +19,8 @@ Genre: Wuxia-themed hack-and-slash with chapter-based progression.
 
 ## What's COSPLAY (placeholder/stub/missing)
 
-- **Sprite art**: All entities use `Polygon2D` colored shapes — no real sprites, no sprite sheets, no animations.
-- **Animations**: No `AnimatedSprite2D` anywhere. Attack = hitbox enable/disable. Death = color change + reload scene. No attack swing anims, no walk cycles, no idle anims.
+- **Sprite system**: ✅ **v0.67** AnimatedSprite2D replaces Polygon2D for all characters. Procedural pixel art sprite sheets (idle/walk/attack). Polygon2D kept as fallback comment.
+- **Animations**: ✅ **v0.67** AnimatedSprite2D with idle/walk/attack states for player, skeleton, captain, archer, merchant. Sprite sheets generated procedurally via `generate_sprites_v2.py`.
 - **Sound assets**: `.wav` files are referenced but are editor folding cache entries — no actual audio files in `assets/`.
 - ~~**Weapon system**~~ ✅ **v0.60**: WEAPON_STATS dict with broken_sword, steel_dagger, captain_blade. Auto-equip best weapon. DMG/cooldown read from GameState.equipped_weapon.
 - **Skill system**: Mobile controls have a `skill1_btn` wired to dodge roll (_start_dodge). Charged heavy attack not yet implemented.
@@ -34,7 +34,7 @@ Genre: Wuxia-themed hack-and-slash with chapter-based progression.
 ## Scope to Finished Product
 
 ### Must-Have (MVP — Playable Demo)
-1. **Replace Polygon2D with pixel art sprites**: Player, skeletons x3 variants, merchant, captain. Minimum: idle + walk + attack (3-frame each).
+1. **Replace Polygon2D with pixel art sprites** ✅ **v0.67**: AnimatedSprite2D with procedural sprite sheets for all characters (idle/walk/attack). Player has 3 idle + 3 walk + 4 attack frames.
 2. **Tilemap levels**: At least 3 arena maps matching ch001–ch003 themes (field, forest, fortress). Use Godot TileMap with collision.
 3. **Weapon stat differentiation**: broken_sword (8 DMG, 0.4s cooldown) → steel_dagger (12 DMG, 0.3s cooldown) → captain's blade (15 DMG, 0.5s). Swap on chapter unlock.
 4. **Sound effects**: Sword swing, sword hit, arrow fire, arrow impact, skeleton death, player hurt, BGM loop per chapter (even placeholder chiptune).

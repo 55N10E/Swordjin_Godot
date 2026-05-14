@@ -237,3 +237,57 @@ LAST_RUN=20260513_1051
 ### Commit: `67a8111`
 
 LAST_RUN=20260513_1232
+
+# v0.67 — AnimatedSprite2D + Procedural Sprite Sheets
+
+### New Files
+- `scripts/generate_sprites_v2.py` — Procedural sprite sheet generator
+  - Generates horizontal strip sprite sheets (idle/walk/attack) for all characters
+  - Player: 3 idle, 3 walk, 4 attack frames
+  - Skeleton: 2 idle, 2 walk, 2 attack frames
+  - Captain: 2 idle, 2 walk, 2 attack frames (with shield overlay)
+  - Archer: 2 idle, 2 walk frames
+  - Merchant: 2 idle frames
+- `assets/art/characters/player_idle.png` (3 frames, 96×32px)
+- `assets/art/characters/player_walk.png` (3 frames, 96×32px)
+- `assets/art/characters/player_attack.png` (4 frames, 128×32px)
+- `assets/art/enemies/skeleton_idle.png` (2 frames, 64×32px)
+- `assets/art/enemies/skeleton_walk.png` (2 frames, 64×32px)
+- `assets/art/enemies/skeleton_attack.png` (2 frames, 64×32px)
+- `assets/art/enemies/captain_idle.png` (2 frames, 64×32px)
+- `assets/art/enemies/captain_walk.png` (2 frames, 64×32px)
+- `assets/art/enemies/captain_attack.png` (2 frames, 64×32px)
+- `assets/art/enemies/archer_idle.png` (2 frames, 64×32px)
+- `assets/art/enemies/archer_walk.png` (2 frames, 64×32px)
+- `assets/art/npcs/merchant_idle.png` (2 frames, 64×32px)
+
+### Updated Scenes
+- `scenes/player.tscn` — Polygon2D → AnimatedSprite2D with SpriteFrames (idle/walk/attack)
+- `scenes/skeleton.tscn` — Polygon2D → AnimatedSprite2D with SpriteFrames (idle/walk/attack)
+- `scenes/skeleton_captain.tscn` — Polygon2D → AnimatedSprite2D + Shield overlay preserved
+- `scenes/skeleton_archer.tscn` — Polygon2D → AnimatedSprite2D (idle/walk)
+- `scenes/merchant_ally.tscn` — Polygon2D → AnimatedSprite2D (idle)
+
+### Updated Scripts
+- `scripts/player.gd` — `$Polygon2D` → `$AnimatedSprite2D`, play("idle/walk/attack") state machine
+- `scripts/skeleton.gd` — `$Polygon2D` → `$AnimatedSprite2D`, animation state machine (idle/chase/attack)
+- `scripts/skeleton_captain.gd` — `$Polygon2D` → `$AnimatedSprite2D`, animation state machine + shield overlay
+- `scripts/skeleton_archer.gd` — `$Polygon2D` → `$AnimatedSprite2D`, animation state machine (idle/walk/move)
+
+### Architecture
+- All characters now use AnimatedSprite2D with named animations
+- Animation states: idle, walk, attack (per character type)
+- Player: idle↔walk on movement, attack on input, dodge uses modulate opacity
+- Enemies: idle when stationary, walk when chasing, attack on attack
+- Captain retains Shield Polygon2D overlay (visual only, separate from sprite)
+- Procedural sprites: 16×16 logical px, scaled 2× = 32×32 display, palette-based pixel art
+- `generate_sprites_v2.py` can be re-run to regenerate all sprite sheets
+
+### Must-Have #1 Status: ✅ DONE (v0.67)
+Procedural sprites + AnimatedSprite2D replaces all Polygon2D visuals.
+Polygon2D kept only as captain shield overlay (visual effect, not character body).
+
+### Zero Parse Errors ✅ (manual review)
+### Commit: TBD
+
+LAST_RUN=20260514_0710

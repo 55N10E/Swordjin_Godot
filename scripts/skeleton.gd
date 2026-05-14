@@ -17,7 +17,7 @@ var attack_timer := 0.0
 var cooldown_timer := 0.0
 var is_dead := false
 
-@onready var sprite = $Polygon2D
+@onready var sprite = $AnimatedSprite2D
 @onready var attack_hitbox = $AttackHitbox/CollisionShape2D
 @onready var detection_area = $DetectionArea
 @onready var label = $Label
@@ -29,6 +29,7 @@ func _ready():
 	health = max_health
 	attack_hitbox.set_deferred("disabled", true)
 	_update_label()
+	sprite.play("idle")
 	
 	# Find player in scene
 	await get_tree().process_frame
@@ -63,11 +64,15 @@ func _physics_process(delta):
 	if dist <= detection_range and dist > attack_range:
 		var dir = to_player.normalized()
 		velocity = dir * speed
+		if not is_attacking:
+			sprite.play("walk")
 	elif dist <= attack_range and cooldown_timer <= 0 and not is_attacking:
 		_start_attack()
 		velocity = Vector2.ZERO
 	else:
 		velocity = Vector2.ZERO
+		if not is_attacking:
+			sprite.play("idle")
 	
 	move_and_slide()
 
@@ -76,6 +81,7 @@ func _start_attack():
 	attack_timer = attack_duration
 	cooldown_timer = attack_duration + attack_cooldown
 	attack_hitbox.disabled = false
+	sprite.play("attack")
 	
 	AudioManager.play_random_pitch("sword_swing", 0.85, 1.15)
 	
@@ -90,6 +96,7 @@ func _end_attack():
 	is_attacking = false
 	attack_hitbox.disabled = true
 	velocity = Vector2.ZERO
+	sprite.play("idle")
 
 func take_damage(amount: int):
 	if is_dead:

@@ -28,7 +28,7 @@ var shield_cooldown := 0.0
 var charge_ready := false
 var charge_timer := 0.0
 
-@onready var sprite = $Polygon2D
+@onready var sprite = $AnimatedSprite2D
 @onready var shield_sprite = $Shield
 @onready var attack_hitbox = $AttackHitbox/CollisionShape2D
 @onready var detection_area = $DetectionArea
@@ -43,6 +43,7 @@ func _ready():
 	_update_shield_visual()
 	attack_hitbox.set_deferred("disabled", true)
 	_update_label()
+	sprite.play("idle")
 	
 	await get_tree().process_frame
 	player = get_tree().get_first_node_in_group("player")
@@ -95,13 +96,18 @@ func _physics_process(delta):
 			_update_shield_visual()
 			charge_ready = false
 			charge_timer = 4.0
+			sprite.play("walk")
 		else:
 			velocity = dir * speed
+			if not is_attacking:
+				sprite.play("walk")
 	elif dist <= attack_range and cooldown_timer <= 0 and not is_attacking:
 		_start_attack()
 		velocity = Vector2.ZERO
 	else:
 		velocity = Vector2.ZERO
+		if not is_attacking:
+			sprite.play("idle")
 	
 	move_and_slide()
 
@@ -110,6 +116,7 @@ func _start_attack():
 	attack_timer = attack_duration
 	cooldown_timer = attack_duration + attack_cooldown
 	attack_hitbox.disabled = false
+	sprite.play("attack")
 	
 	AudioManager.play_random_pitch("sword_swing", 0.7, 1.0)
 	
@@ -124,6 +131,7 @@ func _end_attack():
 	is_attacking = false
 	attack_hitbox.disabled = true
 	velocity = Vector2.ZERO
+	sprite.play("idle")
 
 func show_damage_number(amount: int, is_heal := false):
 	var dn = damage_number_scene.instantiate() as Node2D

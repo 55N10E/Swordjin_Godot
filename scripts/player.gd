@@ -22,7 +22,7 @@ var dodge_timer := 0.0
 var dodge_cooldown_timer := 0.0
 var is_dead := false
 
-@onready var sprite = $Polygon2D
+@onready var sprite = $AnimatedSprite2D
 @onready var attack_hitbox = $AttackHitbox/CollisionShape2D
 @onready var label = $Label
 @onready var health_bar = $HealthBar
@@ -35,6 +35,7 @@ func _ready():
 	_update_label()
 	if health_bar:
 		health_bar.update_health(health, max_health)
+	sprite.play("idle")
 
 func _apply_weapon():
 	var weapon := GameState.get_weapon_stats()
@@ -82,6 +83,11 @@ func _physics_process(delta):
 			sprite.scale.x = 1
 		elif input.x < 0:
 			sprite.scale.x = -1
+		if not is_attacking:
+			sprite.play("walk")
+	else:
+		if not is_attacking:
+			sprite.play("idle")
 	
 	# Dodge input
 	if Input.is_action_just_pressed("skill1") and dodge_cooldown_timer <= 0 and not is_attacking:
@@ -192,6 +198,7 @@ func _start_attack():
 	attack_timer = attack_duration
 	cooldown_timer = attack_duration + attack_cooldown
 	attack_hitbox.disabled = false
+	sprite.play("attack")
 	
 	AudioManager.play_random_pitch("sword_swing", 0.95, 1.05)
 	
@@ -206,6 +213,7 @@ func _end_attack():
 	is_attacking = false
 	attack_hitbox.disabled = true
 	velocity = Vector2.ZERO
+	sprite.play("idle")
 
 # --- DODGE ROLL ---
 func _start_dodge():
