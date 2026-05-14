@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g id="broken_sword" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Blade (broken, chipped) -->
+    <path d="M22 6 L28 4 L30 18 L34 14 L32 30 L28 28 L26 36 L22 32 L24 20 L20 22 Z" fill="#A0A8B0" stroke="#707880" stroke-width="1.5"/>
+    <!-- Rust spots -->
+    <circle cx="26" cy="14" r="2" fill="#8B2500" stroke="none"/>
+    <circle cx="28" cy="24" r="1.5" fill="#8B2500" stroke="none"/>
+    <circle cx="23" cy="20" r="1" fill="#8B2500" stroke="none"/>
+    <!-- Guard -->
+    <rect x="18" y="36" width="16" height="4" rx="1" fill="#604020" stroke="#402010" stroke-width="1"/>
+    <!-- Handle -->
+    <line x1="26" y1="40" x2="26" y2="56" stroke="#604020" stroke-width="4"/>
+    <!-- Pommel -->
+    <circle cx="26" cy="58" r="3" fill="#604020" stroke="#402010" stroke-width="1"/>
+  </g>
+</svg>

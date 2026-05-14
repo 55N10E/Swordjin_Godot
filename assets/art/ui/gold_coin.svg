@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <g id="gold_coin" stroke="#B8960F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FFD700">
+    <circle cx="16" cy="16" r="12"/>
+    <text x="16" y="21" text-anchor="middle" font-size="14" font-weight="bold" fill="#B8960F" stroke="none">$</text>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g id="steel_dagger" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Blade -->
+    <path d="M30 4 L34 6 L34 28 L30 30 L26 28 L26 6 Z" fill="#D0D8E0" stroke="#A0A8B0" stroke-width="1"/>
+    <!-- Edge highlight -->
+    <line x1="30" y1="6" x2="30" y2="28" stroke="#F0F4F8" stroke-width="1" stroke-opacity="0.6"/>
+    <!-- Guard -->
+    <rect x="22" y="30" width="16" height="4" rx="1" fill="#604020" stroke="#402010" stroke-width="1"/>
+    <!-- Handle -->
+    <rect x="28" y="34" width="4" height="16" rx="1" fill="#604020" stroke="#402010" stroke-width="1"/>
+    <!-- Grip lines -->
+    <line x1="28" y1="38" x2="32" y2="38" stroke="#402010" stroke-width="0.5"/>
+    <line x1="28" y1="42" x2="32" y2="42" stroke="#402010" stroke-width="0.5"/>
+    <line x1="28" y1="46" x2="32" y2="46" stroke="#402010" stroke-width="0.5"/>
+    <!-- Pommel -->
+    <circle cx="30" cy="54" r="3" fill="#604020" stroke="#402010" stroke-width="1"/>
+  </g>
+</svg>
