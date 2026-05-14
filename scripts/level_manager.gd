@@ -254,6 +254,7 @@ func _finish_chapter_complete():
 	
 	victory_screen.next_chapter_pressed.connect(_on_victory_next)
 	victory_screen.chapter_select_pressed.connect(_on_victory_select)
+	victory_screen.title_screen_pressed.connect(_on_victory_title)
 
 func _on_victory_next():
 	var next = chapter_data.get("next_chapter", "")
@@ -266,6 +267,11 @@ func _on_victory_next():
 func _on_victory_select():
 	victory_screen.hide_victory()
 	# Player can press C to open chapter manager, or continue playing
+
+func _on_victory_title():
+	ScreenFader.fade_to_black(0.5)
+	await get_tree().create_timer(0.5).timeout
+	get_tree().change_scene_to_file("res://scenes/title_screen.tscn")
 
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:

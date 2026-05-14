@@ -78,4 +78,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Chapter Select"
 
+[node name="TitleButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Return to Title"
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

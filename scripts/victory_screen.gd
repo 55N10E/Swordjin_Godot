@@ -4,6 +4,7 @@ extends CanvasLayer
 
 signal next_chapter_pressed
 signal chapter_select_pressed
+signal title_screen_pressed
 
 @onready var panel = $Panel
 @onready var title_label = $Panel/VBoxContainer/TitleLabel
@@ -12,6 +13,7 @@ signal chapter_select_pressed
 @onready var reward_label = $Panel/VBoxContainer/RewardLabel
 @onready var continue_btn = $Panel/VBoxContainer/HBoxContainer/ContinueButton
 @onready var select_btn = $Panel/VBoxContainer/HBoxContainer/SelectButton
+@onready var title_btn = $Panel/VBoxContainer/HBoxContainer/TitleButton
 @onready var animation = $AnimationPlayer
 
 var _has_next_chapter: bool = false
@@ -21,6 +23,8 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS  # Run while paused
 	continue_btn.pressed.connect(_on_continue)
 	select_btn.pressed.connect(_on_select)
+	title_btn.pressed.connect(_on_title)
+	title_btn.visible = false  # Hidden by default, shown for final chapter
 
 func show_victory(chapter_title: String, xp_gained: int, gold_gained: int = 0, reward_weapon: String = "", reward_skill: String = ""):
 	# Pause the game
@@ -54,6 +58,15 @@ func show_victory(chapter_title: String, xp_gained: int, gold_gained: int = 0, r
 	# Show / hide continue based on whether there's a next chapter
 	continue_btn.visible = _has_next_chapter
 	
+	# Act Complete state for final chapter
+	if not _has_next_chapter:
+		title_label.text = "ACT 1 COMPLETE"
+		title_label.add_theme_color_override("font_color", Color(1.0, 0.843, 0.0))  # Gold #FFD700
+		title_btn.visible = true
+	else:
+		title_label.add_theme_color_override("font_color", Color.WHITE)
+		title_btn.visible = false
+	
 	# Fade in
 	visible = true
 	modulate = Color.TRANSPARENT
@@ -79,6 +92,11 @@ func _on_select():
 	AudioManager.play_sfx("ui_click")
 	hide_victory()
 	chapter_select_pressed.emit()
+
+func _on_title():
+	AudioManager.play_sfx("ui_click")
+	hide_victory()
+	title_screen_pressed.emit()
 
 func hide_victory():
 	var tween = create_tween()
