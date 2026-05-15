@@ -21,10 +21,10 @@ Genre: Wuxia-themed hack-and-slash with chapter-based progression.
 
 - **Sprite system**: ✅ **v0.67** AnimatedSprite2D replaces Polygon2D for all characters. Procedural pixel art sprite sheets (idle/walk/attack). Polygon2D kept as fallback comment.
 - **Animations**: ✅ **v0.67** AnimatedSprite2D with idle/walk/attack states for player, skeleton, captain, archer, merchant. Sprite sheets generated procedurally via `generate_sprites_v2.py`.
-- **Sound assets**: `.wav` files are referenced but are editor folding cache entries — no actual audio files in `assets/`.
+- **Sound assets**: ✅ **v0.68** Generated .wav files in `assets/sfx/` (10 SFX) + `assets/bgm/` (3 BGM tracks). All real audio, not placeholders.
 - ~~**Weapon system**~~ ✅ **v0.60**: WEAPON_STATS dict with broken_sword, steel_dagger, captain_blade. Auto-equip best weapon. DMG/cooldown read from GameState.equipped_weapon.
 - **Skill system**: Mobile controls have a `skill1_btn` wired to dodge roll (_start_dodge). Charged heavy attack not yet implemented.
-- **Level design**: No tilemaps, no collision shapes for walls, no terrain. Combat arenas are empty voids.
+- **Level design**: ✅ **v0.69** Procedural TileMap arenas via `arena_builder.gd`. 4 themed tilesets (field, forest, fortress, dark_fortress). 7 tile types with physics collision.
 - **PWA export**: `export_presets.cfg` exists but no verified HTML5 export pipeline.
 - ~~**Chapters 4+**~~: Ch004 exists with gate mechanic + captain + archer. Act 2 not yet started.
 - **Dummy enemy** (`dummy.gd`): Test target, not a real enemy type.
@@ -35,11 +35,11 @@ Genre: Wuxia-themed hack-and-slash with chapter-based progression.
 
 ### Must-Have (MVP — Playable Demo)
 1. **Replace Polygon2D with pixel art sprites** ✅ **v0.67**: AnimatedSprite2D with procedural sprite sheets for all characters (idle/walk/attack). Player has 3 idle + 3 walk + 4 attack frames.
-2. **Tilemap levels**: At least 3 arena maps matching ch001–ch003 themes (field, forest, fortress). Use Godot TileMap with collision.
+2. **Tilemap levels** ✅ **v0.69**: Procedural TileMap arenas via `arena_builder.gd`. 4 themed tilesets (field, forest, fortress, dark_fortress). 40×22 tile arena with border walls, theme-specific layouts (ponds, tree clusters, corridors, lava), physics collision on walls/hazards.
 3. **Weapon stat differentiation**: broken_sword (8 DMG, 0.4s cooldown) → steel_dagger (12 DMG, 0.3s cooldown) → captain's blade (15 DMG, 0.5s). Swap on chapter unlock.
-4. **Sound effects**: Sword swing, sword hit, arrow fire, arrow impact, skeleton death, player hurt, BGM loop per chapter (even placeholder chiptune).
-5. **Chapter 4 completion**: Boss gate chapter — captain drops key, door opens, chapter complete = Act 1 done.
-6. **Save game**: Save chapter progress + HP + weapon to `user://save.json`. Auto-save on chapter complete. Continue button loads last save.
+4. **Sound effects** ✅ **v0.68**: 10 SFX (sword swing/hit, arrow fire/impact, skeleton death, player hurt, captain charge, shield block, level complete, ui click) + 3 BGM tracks (battle, title, ambience). Generated procedural audio.
+5. **Chapter 4 completion** ✅ **v0.68**: Boss gate chapter — captain drops key, door opens, chapter complete = Act 1 done.
+6. **Save game** ✅ **v0.58**: Save chapter progress + HP + weapon to `user://save.json`. Auto-save on chapter complete. Continue button loads last save.
 
 ### Should-Have (Polished Demo)
 7. **Attack animations**: 4-frame swing anim for player. 2-frame attack for skeletons. Captain has shield-block anim.
