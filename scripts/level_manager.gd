@@ -14,6 +14,7 @@ var enemies_remaining := 0
 var dialogue_triggered := {}
 var pause_menu: Control
 var victory_screen: CanvasLayer
+var arena: Node2D  # ArenaBuilder tilemap
 
 func _ready():
 	# Load chapter 001 by default
@@ -23,6 +24,11 @@ func _ready():
 	if chapter_data.is_empty():
 		push_error("No chapter data loaded")
 		return
+	
+	# Build tilemap arena
+	arena = load("res://scripts/arena_builder.gd").new()
+	var chapter_id = chapter_data.get("chapter_id", "act01_ch001")
+	arena.setup(chapter_id, self)
 	
 	# Setup scene
 	_setup_level()
@@ -56,9 +62,8 @@ func _ready():
 	$Objective.text = "Objective: " + chapter_data.get("objective", "Defeat enemies!")
 	$LevelLabel.text = chapter_data.get("title", "Level 1")
 	
-	# Set background color
-	var bg = chapter_data.get("background_color", [0.08, 0.1, 0.12])
-	$ColorRect.color = Color(bg[0], bg[1], bg[2])
+	# Background handled by ArenaBuilder tilemap
+	# (ColorRect removed by arena builder)
 	
 	# Fade in from black
 	ScreenFader.fade_from_black(0.4)

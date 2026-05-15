@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g id="skeleton_attack" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Skull (lunging forward) -->
+    <rect x="26" y="6" width="8" height="10" rx="2" fill="#DCE6F0"/>
+    <rect x="26" y="12" width="8" height="4" fill="#B4BEC8"/>
+    <!-- Eye sockets (brighter, aggressive) -->
+    <rect x="27" y="8" width="3" height="3" rx="1" fill="#00DC00"/>
+    <rect x="30" y="8" width="3" height="3" rx="1" fill="#00DC00"/>
+    <rect x="27.5" y="8.5" width="2" height="2" rx="0.5" fill="#00FF00"/>
+    <rect x="30.5" y="8.5" width="2" height="2" rx="0.5" fill="#00FF00"/>
+    <!-- Jaw (open) -->
+    <rect x="28" y="14" width="4" height="3" fill="#B4BEC8"/>
+    <line x1="29" y1="15" x2="31" y2="15" stroke="#32323C" stroke-width="0.5"/>
+    <line x1="29" y1="16" x2="31" y2="16" stroke="#32323C" stroke-width="0.5"/>
+    <!-- Neck -->
+    <rect x="29" y="17" width="2" height="3" fill="#DCE6F0"/>
+    <!-- Ribcage (leaning) -->
+    <path d="M24,20 L36,20 L34,34 L26,34 Z" fill="none" stroke="#DCE6F0" stroke-width="2"/>
+    <line x1="26" y1="24" x2="34" y2="24" stroke="#B4BEC8" stroke-width="1.5"/>
+    <line x1="26" y1="28" x2="34" y2="28" stroke="#B4BEC8" stroke-width="1.5"/>
+    <line x1="26" y1="32" x2="34" y2="32" stroke="#B4BEC8" stroke-width="1.5"/>
+    <!-- Pelvis -->
+    <path d="M26,34 L34,34 L32,38 L28,38 Z" fill="#B4BEC8"/>
+    <!-- Left arm (back) -->
+    <rect x="20" y="22" width="3" height="12" rx="1" fill="#DCE6F0"/>
+    <circle cx="21.5" cy="22" r="2" fill="#32323C"/>
+    <!-- Right arm (attacking - extended) -->
+    <rect x="38" y="14" width="3" height="10" rx="1" fill="#DCE6F0"/>
+    <circle cx="39.5" cy="14" r="2" fill="#32323C"/>
+    <!-- Rusty sword (thrust forward) -->
+    <g id="attack_sword">
+      <line x1="40" y1="20" x2="58" y2="16" stroke="#641E1E" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="56" y1="16" x2="60" y2="14" stroke="#8B2500" stroke-width="1.5" stroke-linecap="round"/>
+      <rect x="39" y="22" width="4" height="2" fill="#3C2D1E"/>
+    </g>
+    <!-- Left leg -->
+    <rect x="24" y="38" width="3" height="12" fill="#DCE6F0"/>
+    <circle cx="25.5" cy="38" r="2" fill="#32323C"/>
+    <rect x="23" y="48" width="5" height="3" rx="1" fill="#B4BEC8"/>
+    <!-- Right leg (forward lunge) -->
+    <rect x="34" y="38" width="3" height="10" fill="#DCE6F0"/>
+    <circle cx="35.5" cy="38" r="2" fill="#32323C"/>
+    <rect x="33" y="46" width="5" height="3" rx="1" fill="#B4BEC8"/>
+    <!-- Attack motion lines -->
+    <line x1="44" y1="12" x2="50" y2="10" stroke="#641E1E" stroke-width="0.8" opacity="0.5"/>
+    <line x1="46" y1="14" x2="52" y2="12" stroke="#641E1E" stroke-width="0.8" opacity="0.4"/>
+  </g>
+</svg>

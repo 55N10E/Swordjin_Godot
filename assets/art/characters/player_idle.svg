@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g id="player_idle">
+    <!-- Hair -->
+    <path d="M28,8 L36,8 L38,14 L26,14 Z" fill="#644020"/>
+    <path d="M30,8 L34,8 L35,12 L29,12 Z" fill="#8C5028"/>
+    <!-- Face -->
+    <rect x="28" y="14" width="8" height="8" rx="1" fill="#DCB48C"/>
+    <rect x="28" y="18" width="8" height="4" fill="#BE966E"/>
+    <!-- Eyes -->
+    <rect x="30" y="16" width="2" height="2" fill="#1A1A2E"/>
+    <rect x="34" y="16" width="2" height="2" fill="#1A1A2E"/>
+    <!-- Tunic -->
+    <path d="M24,22 L40,22 L42,38 L22,38 Z" fill="#3250A0"/>
+    <path d="M26,22 L38,22 L39,36 L25,36 Z" fill="#1E3B78"/>
+    <!-- Belt -->
+    <rect x="24" y="34" width="16" height="3" fill="#3C2D1E"/>
+    <rect x="30" y="34" width="4" height="3" fill="#B4A078"/>
+    <!-- Arms -->
+    <rect x="20" y="22" width="4" height="14" rx="1" fill="#3250A0"/>
+    <rect x="40" y="22" width="4" height="14" rx="1" fill="#1E3B78"/>
+    <!-- Hands -->
+    <rect x="20" y="34" width="4" height="3" rx="1" fill="#DCB48C"/>
+    <rect x="40" y="34" width="4" height="3" rx="1" fill="#DCB48C"/>
+    <!-- Sword (at side) -->
+    <g id="sword">
+      <rect x="44" y="30" width="2" height="18" fill="#C8C8D2"/>
+      <rect x="44" y="28" width="2" height="4" fill="#F0F0FA"/>
+      <rect x="43" y="46" width="4" height="2" fill="#3C2D1E"/>
+    </g>
+    <!-- Legs -->
+    <rect x="26" y="38" width="5" height="10" fill="#3C2D1E"/>
+    <rect x="33" y="38" width="5" height="10" fill="#3C2D1E"/>
+    <!-- Boots -->
+    <rect x="25" y="46" width="7" height="4" rx="1" fill="#3C2D1E"/>
+    <rect x="32" y="46" width="7" height="4" rx="1" fill="#3C2D1E"/>
+    <!-- Red accent (sash) -->
+    <path d="M28,22 L36,22 L36,24 L28,24 Z" fill="#A02828"/>
+  </g>
+</svg>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g id="player_dodge">
+    <!-- Ghost trail (50% opacity) -->
+    <g id="ghost_trail" opacity="0.3">
+      <path d="M8,22 L24,22 L26,38 L6,38 Z" fill="#5080C8"/>
+      <rect x="8" y="14" width="8" height="8" rx="1" fill="#DCB48C"/>
+      <rect x="6" y="38" width="5" height="10" fill="#3C2D1E"/>
+      <rect x="18" y="38" width="5" height="10" fill="#3C2D1E"/>
+    </g>
+    <!-- Hair (rolling, angled) -->
+    <path d="M32,14 L40,12 L42,18 L30,20 Z" fill="#644020"/>
+    <path d="M34,14 L38,12 L39,16 L33,18 Z" fill="#8C5028"/>
+    <!-- Face (ducked) -->
+    <rect x="32" y="20" width="8" height="7" rx="1" fill="#DCB48C"/>
+    <rect x="32" y="24" width="8" height="3" fill="#BE966E"/>
+    <!-- Eyes (squinting) -->
+    <line x1="34" y1="23" x2="36" y2="23" stroke="#1A1A2E" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="38" y1="23" x2="40" y2="23" stroke="#1A1A2E" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Tunic (crouched/leaning) -->
+    <path d="M28,27 L44,27 L46,40 L26,40 Z" fill="#3250A0"/>
+    <path d="M30,27 L42,27 L43,38 L29,38 Z" fill="#1E3B78"/>
+    <!-- Belt -->
+    <rect x="28" y="36" width="16" height="3" fill="#3C2D1E"/>
+    <rect x="34" y="36" width="4" height="3" fill="#B4A078"/>
+    <!-- Arms (tucked) -->
+    <rect x="24" y="28" width="4" height="10" rx="1" fill="#3250A0"/>
+    <rect x="44" y="28" width="4" height="10" rx="1" fill="#1E3B78"/>
+    <!-- Hands -->
+    <rect x="24" y="36" width="4" height="3" rx="1" fill="#DCB48C"/>
+    <rect x="44" y="36" width="4" height="3" rx="1" fill="#DCB48C"/>
+    <!-- Sword (held low) -->
+    <line x1="46" y1="36" x2="52" y2="50" stroke="#C8C8D2" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="46" cy="37" r="2" fill="#3C2D1E"/>
+    <!-- Legs (crouched) -->
+    <rect x="30" y="40" width="5" height="8" fill="#3C2D1E"/>
+    <rect x="37" y="40" width="5" height="8" fill="#3C2D1E"/>
+    <!-- Boots -->
+    <rect x="29" y="46" width="7" height="4" rx="1" fill="#3C2D1E"/>
+    <rect x="36" y="46" width="7" height="4" rx="1" fill="#3C2D1E"/>
+    <!-- Dodge motion lines -->
+    <path d="M16,30 L22,30" stroke="#5080C8" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
+    <path d="M14,34 L22,34" stroke="#5080C8" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
+    <path d="M12,38 L20,38" stroke="#5080C8" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+    <!-- Red accent -->
+    <path d="M32,27 L40,27 L40,29 L32,29 Z" fill="#A02828"/>
+  </g>
+</svg>

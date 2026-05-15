@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g id="player_attack">
+    <!-- Hair (leaning forward) -->
+    <path d="M26,10 L34,8 L36,14 L24,16 Z" fill="#644020"/>
+    <path d="M28,10 L32,8 L33,12 L27,14 Z" fill="#8C5028"/>
+    <!-- Face (angled) -->
+    <rect x="24" y="14" width="8" height="8" rx="1" fill="#DCB48C"/>
+    <rect x="24" y="18" width="8" height="4" fill="#BE966E"/>
+    <!-- Eyes (focused) -->
+    <rect x="26" y="16" width="2" height="2" fill="#1A1A2E"/>
+    <rect x="30" y="16" width="2" height="2" fill="#1A1A2E"/>
+    <!-- Tunic (twisted for swing) -->
+    <path d="M22,22 L38,22 L40,38 L20,38 Z" fill="#3250A0"/>
+    <path d="M24,22 L36,22 L37,36 L23,36 Z" fill="#1E3B78"/>
+    <!-- Belt -->
+    <rect x="22" y="34" width="16" height="3" fill="#3C2D1E"/>
+    <rect x="28" y="34" width="4" height="3" fill="#B4A078"/>
+    <!-- Left arm (back) -->
+    <rect x="18" y="24" width="4" height="12" rx="1" fill="#3250A0"/>
+    <rect x="18" y="34" width="4" height="3" rx="1" fill="#DCB48C"/>
+    <!-- Right arm (extended swing) -->
+    <rect x="40" y="16" width="4" height="12" rx="1" fill="#1E3B78"/>
+    <rect x="40" y="26" width="4" height="3" rx="1" fill="#DCB48C"/>
+    <!-- Sword (extended, mid-swing arc) -->
+    <g id="sword_swing">
+      <line x1="42" y1="24" x2="58" y2="18" stroke="#C8C8D2" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="56" y1="18" x2="60" y2="16" stroke="#F0F0FA" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="42" cy="26" r="2.5" fill="#3C2D1E"/>
+      <!-- Slash arc trail -->
+      <path d="M44,20 Q54,10 60,14" stroke="#FFD700" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+    </g>
+    <!-- Legs (wide stance) -->
+    <rect x="20" y="38" width="6" height="12" fill="#3C2D1E"/>
+    <rect x="34" y="38" width="6" height="10" fill="#3C2D1E"/>
+    <!-- Boots -->
+    <rect x="19" y="48" width="8" height="4" rx="1" fill="#3C2D1E"/>
+    <rect x="33" y="46" width="8" height="4" rx="1" fill="#3C2D1E"/>
+    <!-- Red accent -->
+    <path d="M26,22 L34,22 L34,24 L26,24 Z" fill="#A02828"/>
+  </g>
+</svg>

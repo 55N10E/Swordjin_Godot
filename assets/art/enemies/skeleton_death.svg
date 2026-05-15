@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g id="skeleton_death" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Skull (detached, falling) -->
+    <rect x="36" y="42" width="8" height="8" rx="2" fill="#DCE6F0"/>
+    <rect x="37" y="44" width="2" height="2" rx="1" fill="#00A000" opacity="0.5"/>
+    <rect x="41" y="44" width="2" height="2" rx="1" fill="#00A000" opacity="0.5"/>
+    <!-- Jaw (separated) -->
+    <rect x="38" y="50" width="4" height="2" fill="#B4BEC8"/>
+    <!-- Scattered ribs -->
+    <line x1="20" y1="38" x2="28" y2="42" stroke="#DCE6F0" stroke-width="2"/>
+    <line x1="22" y1="44" x2="30" y2="40" stroke="#B4BEC8" stroke-width="1.5"/>
+    <line x1="18" y1="46" x2="26" y2="48" stroke="#DCE6F0" stroke-width="1.5"/>
+    <!-- Spine (collapsing) -->
+    <line x1="30" y1="36" x2="32" y2="44" stroke="#DCE6F0" stroke-width="2"/>
+    <line x1="32" y1="44" x2="34" y2="50" stroke="#B4BEC8" stroke-width="1.5"/>
+    <!-- Pelvis (on ground) -->
+    <path d="M28,52 L36,52 L34,56 L30,56 Z" fill="#B4BEC8"/>
+    <!-- Left arm (scattered) -->
+    <line x1="16" y1="50" x2="22" y2="54" stroke="#DCE6F0" stroke-width="2"/>
+    <circle cx="16" cy="50" r="2" fill="#32323C"/>
+    <!-- Right arm (on ground) -->
+    <line x1="38" y1="52" x2="44" y2="56" stroke="#DCE6F0" stroke-width="2"/>
+    <circle cx="44" cy="56" r="2" fill="#32323C"/>
+    <!-- Left leg (fallen) -->
+    <line x1="24" y1="56" x2="30" y2="58" stroke="#DCE6F0" stroke-width="2"/>
+    <rect x="22" y="58" width="4" height="2" rx="0.5" fill="#B4BEC8"/>
+    <!-- Right leg (fallen) -->
+    <line x1="36" y1="54" x2="42" y2="58" stroke="#DCE6F0" stroke-width="2"/>
+    <rect x="40" y="58" width="4" height="2" rx="0.5" fill="#B4BEC8"/>
+    <!-- Rusty sword (dropped) -->
+    <line x1="48" y1="50" x2="56" y2="56" stroke="#641E1E" stroke-width="2" stroke-linecap="round"/>
+    <rect x="46" y="48" width="4" height="2" fill="#3C2D1E"/>
+    <!-- Death particles (bone fragments) -->
+    <rect x="14" y="56" width="2" height="2" fill="#DCE6F0" opacity="0.7"/>
+    <rect x="46" y="46" width="2" height="2" fill="#B4BEC8" opacity="0.6"/>
+    <rect x="50" y="52" width="2" height="2" fill="#DCE6F0" opacity="0.5"/>
+    <rect x="12" y="44" width="2" height="2" fill="#B4BEC8" opacity="0.4"/>
+    <!-- Fading glow from eyes -->
+    <circle cx="38" cy="45" r="2" fill="#00DC00" opacity="0.3"/>
+    <circle cx="42" cy="45" r="2" fill="#00DC00" opacity="0.3"/>
+  </g>
+</svg>

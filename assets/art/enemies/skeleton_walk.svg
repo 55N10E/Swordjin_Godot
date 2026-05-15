@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g id="skeleton_walk" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Skull -->
+    <rect x="28" y="6" width="8" height="10" rx="2" fill="#DCE6F0"/>
+    <rect x="28" y="12" width="8" height="4" fill="#B4BEC8"/>
+    <!-- Eye sockets -->
+    <rect x="29" y="8" width="3" height="3" rx="1" fill="#00DC00"/>
+    <rect x="32" y="8" width="3" height="3" rx="1" fill="#00DC00"/>
+    <rect x="29.5" y="8.5" width="2" height="2" rx="0.5" fill="#00A000"/>
+    <rect x="32.5" y="8.5" width="2" height="2" rx="0.5" fill="#00A000"/>
+    <!-- Jaw -->
+    <rect x="30" y="14" width="4" height="2" fill="#B4BEC8"/>
+    <!-- Neck -->
+    <rect x="31" y="16" width="2" height="4" fill="#DCE6F0"/>
+    <!-- Ribcage -->
+    <path d="M26,20 L38,20 L36,34 L28,34 Z" fill="none" stroke="#DCE6F0" stroke-width="2"/>
+    <line x1="28" y1="24" x2="36" y2="24" stroke="#B4BEC8" stroke-width="1.5"/>
+    <line x1="28" y1="28" x2="36" y2="28" stroke="#B4BEC8" stroke-width="1.5"/>
+    <line x1="28" y1="32" x2="36" y2="32" stroke="#B4BEC8" stroke-width="1.5"/>
+    <!-- Pelvis -->
+    <path d="M28,34 L36,34 L34,38 L30,38 Z" fill="#B4BEC8"/>
+    <!-- Left arm (swinging back) -->
+    <rect x="22" y="22" width="3" height="12" rx="1" fill="#DCE6F0"/>
+    <circle cx="23.5" cy="22" r="2" fill="#32323C"/>
+    <rect x="22" y="32" width="3" height="2" fill="#DCE6F0"/>
+    <!-- Right arm (forward) -->
+    <rect x="39" y="18" width="3" height="14" rx="1" fill="#DCE6F0"/>
+    <circle cx="40.5" cy="18" r="2" fill="#32323C"/>
+    <rect x="39" y="30" width="3" height="2" fill="#DCE6F0"/>
+    <!-- Left leg (back stride) -->
+    <rect x="24" y="38" width="3" height="14" fill="#DCE6F0"/>
+    <circle cx="25.5" cy="38" r="2" fill="#32323C"/>
+    <rect x="23" y="50" width="5" height="3" rx="1" fill="#B4BEC8"/>
+    <!-- Right leg (forward stride) -->
+    <rect x="35" y="38" width="3" height="10" fill="#DCE6F0"/>
+    <circle cx="36.5" cy="38" r="2" fill="#32323C"/>
+    <rect x="34" y="46" width="5" height="3" rx="1" fill="#B4BEC8"/>
+    <!-- Rusty sword -->
+    <line x1="41" y1="28" x2="48" y2="44" stroke="#641E1E" stroke-width="2" stroke-linecap="round"/>
+    <rect x="40" y="30" width="4" height="2" fill="#3C2D1E"/>
+  </g>
+</svg>
